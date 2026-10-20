@@ -18,7 +18,9 @@ class AppImage extends StatelessWidget {
     return Image(
       width: width,
       height: height,
-      image: isAsset ? AssetImage(imageUri) : NetworkImage(imageUri),
+      image: isAsset
+          ? AssetImage('assets/images/$imageUri')
+          : NetworkImage(imageUri),
     );
   }
 }
