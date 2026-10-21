@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
+import 'package:wallet_app/ui/home/widgets/section_label.dart';
 
 import '../../core/ui/index.dart';
 
@@ -12,20 +13,7 @@ class YourAssets extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: Spacing.md,
       children: [
-        const Row(
-          spacing: Spacing.sm,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            AppText(
-              text: "Your Assets",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            AppText(
-              text: "See All",
-              style: TextStyle(color: Colors.blue),
-            ),
-          ],
-        ),
+        const SectionLabel(label: "Your Assets"),
         Container(
           padding: AppPadding.cardPadding,
           decoration: RoundedCard.card,
