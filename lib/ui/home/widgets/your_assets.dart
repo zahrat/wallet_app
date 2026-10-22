@@ -14,9 +14,7 @@ class YourAssets extends StatelessWidget {
       spacing: Spacing.md,
       children: [
         const SectionLabel(label: "Your Assets"),
-        Container(
-          padding: AppPadding.cardPadding,
-          decoration: RoundedCard.card,
+        RoundedCard(
           child: Row(
             spacing: Spacing.sm,
             children: [

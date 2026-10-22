@@ -13,9 +13,7 @@ class RecentTransactions extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SectionLabel(label: "Recent Transactions"),
-        Container(
-          padding: AppPadding.cardPadding,
-          decoration: RoundedCard.card,
+        RoundedCard(
           child: Row(
             spacing: Spacing.sm,
             children: [
