@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:wallet_app/ui/core/theme/app_colors.dart';
 import 'package:wallet_app/ui/core/theme/app_fontsize.dart';
 
 final lightTheme = ThemeData.light().copyWith(
+  extensions: const <ThemeExtension<dynamic>>[
+    AppColors(
+      borderColor: Color.fromARGB(189, 224, 226, 227),
+      grayIcon: Color.fromARGB(187, 127, 129, 129),
+    ),
+  ],
   colorScheme: ColorScheme(
     brightness: Brightness.light,
     primary: Color.fromARGB(255, 185, 43, 237),
     onPrimary: Color.fromARGB(255, 185, 54, 233),
-    secondary: Color.fromARGB(255, 14, 9, 16),
-    onSecondary: Color.fromARGB(255, 14, 9, 16),
+    secondary: Color.fromARGB(255, 233, 213, 241),
+    onSecondary: Color.fromARGB(255, 215, 193, 223),
     error: Colors.red,
     onError: Colors.red,
     surface: const Color.fromARGB(179, 244, 242, 242),
@@ -19,7 +26,11 @@ final lightTheme = ThemeData.light().copyWith(
       fontSize: AppFontsize.sm,
     ),
     headlineMedium: TextStyle(color: Colors.black),
-    titleMedium: TextStyle(color: Colors.black, fontSize: AppFontsize.md),
+    titleMedium: TextStyle(
+      color: Colors.black,
+      fontSize: AppFontsize.md,
+      fontWeight: FontWeight.bold,
+    ),
     titleLarge: TextStyle(
       color: Colors.black,
       fontSize: AppFontsize.xl,
@@ -28,6 +39,11 @@ final lightTheme = ThemeData.light().copyWith(
     titleSmall: TextStyle(
       color: Colors.black,
       fontSize: AppFontsize.sm,
+      fontWeight: FontWeight.bold,
+    ),
+    headlineLarge: TextStyle(
+      color: Colors.black,
+      fontSize: AppFontsize.xxl,
       fontWeight: FontWeight.bold,
     ),
   ),

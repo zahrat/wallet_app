@@ -2,38 +2,21 @@ import 'package:flutter/material.dart';
 
 @immutable
 class AppColors extends ThemeExtension<AppColors> {
-  const AppColors({
-    required this.blackText,
-    required this.grayText,
-    required this.lightGrayText,
-  });
+  const AppColors({required this.borderColor, required this.grayIcon});
 
-  final Color? blackText;
-  final Color? grayText;
-  final Color? lightGrayText;
+  final Color borderColor;
+  final Color grayIcon;
 
   @override
-  AppColors copyWith({
-    Color? blackText,
-    Color? grayText,
-    Color? lightGrayText,
-  }) {
-    return AppColors(
-      blackText: blackText ?? this.blackText,
-      grayText: grayText ?? this.grayText,
-      lightGrayText: lightGrayText ?? this.lightGrayText,
-    );
+  AppColors copyWith() {
+    return AppColors(borderColor: borderColor, grayIcon: grayIcon);
   }
 
   @override
-  AppColors lerp(AppColors? other, double t) {
-    if (other is! AppColors) {
-      return this;
-    }
+  AppColors lerp(AppColors other, double t) {
     return AppColors(
-      blackText: Color.lerp(blackText, other.blackText, t),
-      grayText: Color.lerp(grayText, other.grayText, t),
-      lightGrayText: Color.lerp(lightGrayText, other.lightGrayText, t),
+      borderColor: Color.lerp(borderColor, other.borderColor, t) ?? borderColor,
+      grayIcon: Color.lerp(grayIcon, other.grayIcon, t) ?? grayIcon,
     );
   }
 }
