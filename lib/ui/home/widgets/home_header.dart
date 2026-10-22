@@ -7,20 +7,16 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const AppImage(imageUri: 'app_logo.png', width: 25, height: 25),
         Column(
           children: [
-            const AppText(
-              text: "Wallet 1",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            AppText(
-              text: walletAddress,
-              style: const TextStyle(color: Colors.blueGrey),
-            ),
+            AppText(text: "Wallet 1", style: textTheme.titleSmall),
+            AppText(text: walletAddress, style: textTheme.bodySmall),
           ],
         ),
         const Icon(Icons.notifications_none_rounded),
