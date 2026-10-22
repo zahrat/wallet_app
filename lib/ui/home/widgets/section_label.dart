@@ -9,16 +9,21 @@ class SectionLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         AppText(
           text: label,
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: textTheme.headlineMedium?.color,
+          ),
         ),
         TextButton(
           onPressed: onSeeAll,
-          child: AppText(
+          child: const AppText(
             text: "See All",
             style: TextStyle(color: Colors.blue),
           ),
