@@ -2,14 +2,23 @@ import 'package:flutter/material.dart';
 
 @immutable
 class AppColors extends ThemeExtension<AppColors> {
-  const AppColors({required this.borderColor, required this.grayIcon});
+  const AppColors({
+    required this.borderColor,
+    required this.grayIcon,
+    required this.grayText,
+  });
 
   final Color borderColor;
   final Color grayIcon;
+  final Color grayText;
 
   @override
   AppColors copyWith() {
-    return AppColors(borderColor: borderColor, grayIcon: grayIcon);
+    return AppColors(
+      borderColor: borderColor,
+      grayIcon: grayIcon,
+      grayText: grayText,
+    );
   }
 
   @override
@@ -17,6 +26,7 @@ class AppColors extends ThemeExtension<AppColors> {
     return AppColors(
       borderColor: Color.lerp(borderColor, other.borderColor, t) ?? borderColor,
       grayIcon: Color.lerp(grayIcon, other.grayIcon, t) ?? grayIcon,
+      grayText: Color.lerp(grayText, other.grayText, t) ?? grayText,
     );
   }
 }

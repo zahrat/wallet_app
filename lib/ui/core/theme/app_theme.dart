@@ -3,10 +3,13 @@ import 'package:wallet_app/ui/core/theme/app_colors.dart';
 import 'package:wallet_app/ui/core/theme/app_fontsize.dart';
 
 final lightTheme = ThemeData.light().copyWith(
+  bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white),
+  dividerTheme: DividerThemeData(color: Color.fromARGB(187, 202, 202, 202)),
   extensions: const <ThemeExtension<dynamic>>[
     AppColors(
       borderColor: Color.fromARGB(189, 224, 226, 227),
       grayIcon: Color.fromARGB(187, 127, 129, 129),
+      grayText: Color.fromARGB(187, 127, 129, 129),
     ),
   ],
   colorScheme: ColorScheme(
@@ -20,7 +23,9 @@ final lightTheme = ThemeData.light().copyWith(
     surface: const Color.fromARGB(179, 244, 242, 242),
     onSurface: const Color.fromARGB(255, 241, 235, 235),
   ),
+  iconTheme: IconThemeData(color: Color.fromARGB(186, 80, 80, 80), size: 20),
   textTheme: const TextTheme(
+    bodyMedium: TextStyle(color: Colors.black, fontSize: AppFontsize.md),
     bodySmall: TextStyle(
       color: Color.fromARGB(255, 143, 142, 142),
       fontSize: AppFontsize.sm,
