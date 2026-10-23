@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/routing/app_router.dart';
 import 'package:wallet_app/ui/core/theme/app_theme.dart';
 
@@ -17,6 +19,12 @@ class MyApp extends StatelessWidget {
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
       routerConfig: appRouter,
+
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        ...GlobalMaterialLocalizations.delegates,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }
