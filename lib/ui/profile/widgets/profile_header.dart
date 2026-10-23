@@ -19,7 +19,7 @@ class ProfileHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             AppText(text: "Profile", style: textTheme.headlineLarge),
-            Icon(Icons.settings_outlined, color: appColors.grayIcon),
+            Icon(Icons.sunny),
           ],
         ),
         Container(
