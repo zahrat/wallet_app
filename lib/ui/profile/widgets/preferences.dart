@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/core/theme/app_colors.dart';
 import 'package:wallet_app/ui/core/theme/spacing.dart';
 import 'package:wallet_app/ui/core/ui/index.dart';
@@ -11,6 +12,7 @@ class Preferences extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final appColors = Theme.of(context).extension<AppColors>();
+    final appLocalizations = AppLocalizations.of(context);
 
     void onLanguageTap() async {
       await showModalBottomSheet<String>(
@@ -27,7 +29,7 @@ class Preferences extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppText(
-          text: "PREFERENCES",
+          text: appLocalizations!.preferences,
           style: textTheme.titleMedium?.copyWith(color: appColors?.grayText),
         ),
         RoundedCard(
@@ -35,7 +37,10 @@ class Preferences extends StatelessWidget {
             spacing: Spacing.sm,
             children: [
               const Icon(Icons.language),
-              AppText(text: "Language", style: textTheme.titleMedium),
+              AppText(
+                text: appLocalizations!.language,
+                style: textTheme.titleMedium,
+              ),
               const Expanded(child: SizedBox()),
               GestureDetector(
                 onTap: onLanguageTap,
