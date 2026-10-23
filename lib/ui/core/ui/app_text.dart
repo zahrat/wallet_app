@@ -7,6 +7,6 @@ class AppText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text, style: style);
+    return Text(text, style: style?.copyWith(fontFamily: 'IranYekan'));
   }
 }
