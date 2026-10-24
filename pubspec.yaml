@@ -40,6 +40,7 @@ dependencies:
   intl: any
   freezed_annotation: ^3.1.0
   freezed: ^3.2.5
+  flutter_riverpod: ^3.4.3
 
 dev_dependencies:
   flutter_test:
