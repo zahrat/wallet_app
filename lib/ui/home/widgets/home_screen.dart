@@ -16,6 +16,10 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final wallet = ref.watch(homeViewModelProvider);
+    print('HomeScreen build: wallet: $wallet');
+    final getAssetBalance = ref
+        .read(homeViewModelProvider.notifier)
+        .getAssetBalance;
     final totalBalance = ref.watch(totalBalanceProvider);
 
     return AppContainer(
@@ -29,7 +33,10 @@ class HomeScreen extends ConsumerWidget {
               value: totalBalance,
               data: (balance) => BalanceSection(balance: balance),
             ),
-            YourAssets(),
+            YourAssets(
+              assets: wallet.value?.assets ?? [],
+              getAssetBalance: getAssetBalance,
+            ),
             RecentTransactions(),
           ],
         ),
