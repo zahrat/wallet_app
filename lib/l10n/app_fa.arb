@@ -1,5 +1,8 @@
 {
     "profile": "پروفایل",
   "language":"زبان",
-  "preferences":"تنظیمات"
+  "preferences":"تنظیمات",
+  "all":"همه",
+  "send":"ارسال شده",
+  "recieve":"دریافت شده"
 }

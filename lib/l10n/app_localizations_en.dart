@@ -16,4 +16,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get preferences => 'Preferences';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get send => 'Send';
+
+  @override
+  String get recieve => 'Recieve';
 }

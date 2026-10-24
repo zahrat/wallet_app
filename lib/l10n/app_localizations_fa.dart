@@ -16,4 +16,13 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get preferences => 'تنظیمات';
+
+  @override
+  String get all => 'همه';
+
+  @override
+  String get send => 'ارسال شده';
+
+  @override
+  String get recieve => 'دریافت شده';
 }

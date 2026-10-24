@@ -115,6 +115,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Preferences'**
   String get preferences;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @send.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get send;
+
+  /// No description provided for @recieve.
+  ///
+  /// In en, this message translates to:
+  /// **'Recieve'**
+  String get recieve;
 }
 
 class _AppLocalizationsDelegate

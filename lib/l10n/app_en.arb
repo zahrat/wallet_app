@@ -1,5 +1,8 @@
 {
   "profile":"Profile",
   "language":"Language",
-  "preferences":"Preferences"
+  "preferences":"Preferences",
+  "all":"All",
+  "send":"Send",
+  "recieve":"Recieve"
 }
