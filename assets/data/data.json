@@ -3,15 +3,18 @@
     "assets":[
         {
             "currency":"eth",
-            "balance":123
+            "balance":123,
+            "icon":"https://download.logo.wine/logo/Ethereum/Ethereum-Logo.wine.png"
         },
         {
             "currency":"btc",
-            "balance":4123
+            "balance":4123,
+            "icon":"https://logos-world.net/wp-content/uploads/2020/08/Bitcoin-Logo.png"
         },
         {
             "currency":"usdt",
-            "balance":43
+            "balance":43,
+            "icon":"https://cdn.iconscout.com/icon/free/png-256/free-usdt-logo-icon-svg-download-png-4498211.png"
         }
     ],
     "transactions":[

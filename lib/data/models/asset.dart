@@ -6,8 +6,11 @@ part 'asset.g.dart';
 
 @freezed
 abstract class Asset with _$Asset {
-  const factory Asset({required Currency currency, required double balance}) =
-      _Asset;
+  const factory Asset({
+    required Currency currency,
+    required double balance,
+    required String icon,
+  }) = _Asset;
 
   factory Asset.fromJson(Map<String, dynamic> json) => _$AssetFromJson(json);
 }
