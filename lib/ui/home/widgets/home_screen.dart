@@ -37,7 +37,11 @@ class HomeScreen extends ConsumerWidget {
               assets: wallet.value?.assets ?? [],
               getAssetBalance: getAssetBalance,
             ),
-            RecentTransactions(),
+            RecentTransactions(
+              transactions: wallet.value?.transactions?.sublist(0, 3) ?? [],
+              walletAddress: wallet.value?.address ?? '',
+              getAssetBalance: getAssetBalance,
+            ),
           ],
         ),
       ),

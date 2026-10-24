@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Transaction {
 
- String get from; String get to; Currency get currency; Status get status; int get date;
+ String get from; String get to; Currency get currency; Status get status; int get date; double get value;
 /// Create a copy of Transaction
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TransactionCopyWith<Transaction> get copyWith => _$TransactionCopyWithImpl<Tran
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Transaction&&(identical(other.from, from) || other.from == from)&&(identical(other.to, to) || other.to == to)&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.status, status) || other.status == status)&&(identical(other.date, date) || other.date == date));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Transaction&&(identical(other.from, from) || other.from == from)&&(identical(other.to, to) || other.to == to)&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.status, status) || other.status == status)&&(identical(other.date, date) || other.date == date)&&(identical(other.value, value) || other.value == value));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,from,to,currency,status,date);
+int get hashCode => Object.hash(runtimeType,from,to,currency,status,date,value);
 
 @override
 String toString() {
-  return 'Transaction(from: $from, to: $to, currency: $currency, status: $status, date: $date)';
+  return 'Transaction(from: $from, to: $to, currency: $currency, status: $status, date: $date, value: $value)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $TransactionCopyWith<$Res>  {
   factory $TransactionCopyWith(Transaction value, $Res Function(Transaction) _then) = _$TransactionCopyWithImpl;
 @useResult
 $Res call({
- String from, String to, Currency currency, Status status, int date
+ String from, String to, Currency currency, Status status, int date, double value
 });
 
 
@@ -65,14 +65,15 @@ class _$TransactionCopyWithImpl<$Res>
 
 /// Create a copy of Transaction
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? from = null,Object? to = null,Object? currency = null,Object? status = null,Object? date = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? from = null,Object? to = null,Object? currency = null,Object? status = null,Object? date = null,Object? value = null,}) {
   return _then(_self.copyWith(
 from: null == from ? _self.from : from // ignore: cast_nullable_to_non_nullable
 as String,to: null == to ? _self.to : to // ignore: cast_nullable_to_non_nullable
 as String,currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
 as Currency,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as Status,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
-as int,
+as int,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as double,
   ));
 }
 
@@ -157,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String from,  String to,  Currency currency,  Status status,  int date)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String from,  String to,  Currency currency,  Status status,  int date,  double value)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Transaction() when $default != null:
-return $default(_that.from,_that.to,_that.currency,_that.status,_that.date);case _:
+return $default(_that.from,_that.to,_that.currency,_that.status,_that.date,_that.value);case _:
   return orElse();
 
 }
@@ -178,10 +179,10 @@ return $default(_that.from,_that.to,_that.currency,_that.status,_that.date);case
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String from,  String to,  Currency currency,  Status status,  int date)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String from,  String to,  Currency currency,  Status status,  int date,  double value)  $default,) {final _that = this;
 switch (_that) {
 case _Transaction():
-return $default(_that.from,_that.to,_that.currency,_that.status,_that.date);case _:
+return $default(_that.from,_that.to,_that.currency,_that.status,_that.date,_that.value);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +199,10 @@ return $default(_that.from,_that.to,_that.currency,_that.status,_that.date);case
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String from,  String to,  Currency currency,  Status status,  int date)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String from,  String to,  Currency currency,  Status status,  int date,  double value)?  $default,) {final _that = this;
 switch (_that) {
 case _Transaction() when $default != null:
-return $default(_that.from,_that.to,_that.currency,_that.status,_that.date);case _:
+return $default(_that.from,_that.to,_that.currency,_that.status,_that.date,_that.value);case _:
   return null;
 
 }
@@ -213,7 +214,7 @@ return $default(_that.from,_that.to,_that.currency,_that.status,_that.date);case
 @JsonSerializable()
 
 class _Transaction implements Transaction {
-  const _Transaction({required this.from, required this.to, required this.currency, required this.status, required this.date});
+  const _Transaction({required this.from, required this.to, required this.currency, required this.status, required this.date, required this.value});
   factory _Transaction.fromJson(Map<String, dynamic> json) => _$TransactionFromJson(json);
 
 @override final  String from;
@@ -221,6 +222,7 @@ class _Transaction implements Transaction {
 @override final  Currency currency;
 @override final  Status status;
 @override final  int date;
+@override final  double value;
 
 /// Create a copy of Transaction
 /// with the given fields replaced by the non-null parameter values.
@@ -235,16 +237,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Transaction&&(identical(other.from, from) || other.from == from)&&(identical(other.to, to) || other.to == to)&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.status, status) || other.status == status)&&(identical(other.date, date) || other.date == date));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Transaction&&(identical(other.from, from) || other.from == from)&&(identical(other.to, to) || other.to == to)&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.status, status) || other.status == status)&&(identical(other.date, date) || other.date == date)&&(identical(other.value, value) || other.value == value));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,from,to,currency,status,date);
+int get hashCode => Object.hash(runtimeType,from,to,currency,status,date,value);
 
 @override
 String toString() {
-  return 'Transaction(from: $from, to: $to, currency: $currency, status: $status, date: $date)';
+  return 'Transaction(from: $from, to: $to, currency: $currency, status: $status, date: $date, value: $value)';
 }
 
 
@@ -255,7 +257,7 @@ abstract mixin class _$TransactionCopyWith<$Res> implements $TransactionCopyWith
   factory _$TransactionCopyWith(_Transaction value, $Res Function(_Transaction) _then) = __$TransactionCopyWithImpl;
 @override @useResult
 $Res call({
- String from, String to, Currency currency, Status status, int date
+ String from, String to, Currency currency, Status status, int date, double value
 });
 
 
@@ -272,14 +274,15 @@ class __$TransactionCopyWithImpl<$Res>
 
 /// Create a copy of Transaction
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? from = null,Object? to = null,Object? currency = null,Object? status = null,Object? date = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? from = null,Object? to = null,Object? currency = null,Object? status = null,Object? date = null,Object? value = null,}) {
   return _then(_Transaction(
 from: null == from ? _self.from : from // ignore: cast_nullable_to_non_nullable
 as String,to: null == to ? _self.to : to // ignore: cast_nullable_to_non_nullable
 as String,currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
 as Currency,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as Status,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
-as int,
+as int,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as double,
   ));
 }
 

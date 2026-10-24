@@ -13,6 +13,7 @@ abstract class Transaction with _$Transaction {
     required Currency currency,
     required Status status,
     required int date,
+    required double value,
   }) = _Transaction;
 
   factory Transaction.fromJson(Map<String, dynamic> json) =>

@@ -12,6 +12,7 @@ _Transaction _$TransactionFromJson(Map<String, dynamic> json) => _Transaction(
   currency: $enumDecode(_$CurrencyEnumMap, json['currency']),
   status: $enumDecode(_$StatusEnumMap, json['status']),
   date: (json['date'] as num).toInt(),
+  value: (json['value'] as num).toDouble(),
 );
 
 Map<String, dynamic> _$TransactionToJson(_Transaction instance) =>
@@ -21,6 +22,7 @@ Map<String, dynamic> _$TransactionToJson(_Transaction instance) =>
       'currency': _$CurrencyEnumMap[instance.currency]!,
       'status': _$StatusEnumMap[instance.status]!,
       'date': instance.date,
+      'value': instance.value,
     };
 
 const _$CurrencyEnumMap = {
