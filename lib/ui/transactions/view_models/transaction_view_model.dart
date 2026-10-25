@@ -21,11 +21,11 @@ class TransactionViewModel extends AsyncNotifier<WalletModel> {
     return state.value?.assets ?? [];
   }
 
-  List<Transaction> getTransactions(
+  List<Transaction> getTransactions({
     Currency? currency,
     Sort? sort,
     TransactionTypeEnum? type,
-  ) {
+  }) {
     var transactions = state.value?.transactions ?? [];
     var sortedTransactions = List<Transaction>.from(transactions);
 

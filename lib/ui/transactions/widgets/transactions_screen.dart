@@ -30,7 +30,11 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
         .getAssetBalance;
     final transactions = ref
         .watch(transactionViewModelProvider.notifier)
-        .getTransactions(selectedAsset, selectedSort, selectedTab);
+        .getTransactions(
+          currency: selectedAsset,
+          sort: selectedSort,
+          type: selectedTab,
+        );
 
     void onTap(TransactionTypeEnum type) {
       setState(() {
