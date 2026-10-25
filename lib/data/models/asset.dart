@@ -9,6 +9,7 @@ abstract class Asset with _$Asset {
   const factory Asset({
     required Currency currency,
     required double balance,
+    required String label,
     required String icon,
   }) = _Asset;
 

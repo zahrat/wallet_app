@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Asset {
 
- Currency get currency; double get balance; String get icon;
+ Currency get currency; double get balance; String get label; String get icon;
 /// Create a copy of Asset
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $AssetCopyWith<Asset> get copyWith => _$AssetCopyWithImpl<Asset>(this as Asset, 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Asset&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.balance, balance) || other.balance == balance)&&(identical(other.icon, icon) || other.icon == icon));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Asset&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.balance, balance) || other.balance == balance)&&(identical(other.label, label) || other.label == label)&&(identical(other.icon, icon) || other.icon == icon));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,currency,balance,icon);
+int get hashCode => Object.hash(runtimeType,currency,balance,label,icon);
 
 @override
 String toString() {
-  return 'Asset(currency: $currency, balance: $balance, icon: $icon)';
+  return 'Asset(currency: $currency, balance: $balance, label: $label, icon: $icon)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $AssetCopyWith<$Res>  {
   factory $AssetCopyWith(Asset value, $Res Function(Asset) _then) = _$AssetCopyWithImpl;
 @useResult
 $Res call({
- Currency currency, double balance, String icon
+ Currency currency, double balance, String label, String icon
 });
 
 
@@ -65,11 +65,12 @@ class _$AssetCopyWithImpl<$Res>
 
 /// Create a copy of Asset
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? currency = null,Object? balance = null,Object? icon = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? currency = null,Object? balance = null,Object? label = null,Object? icon = null,}) {
   return _then(_self.copyWith(
 currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
 as Currency,balance: null == balance ? _self.balance : balance // ignore: cast_nullable_to_non_nullable
-as double,icon: null == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
+as double,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String,icon: null == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -155,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Currency currency,  double balance,  String icon)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Currency currency,  double balance,  String label,  String icon)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Asset() when $default != null:
-return $default(_that.currency,_that.balance,_that.icon);case _:
+return $default(_that.currency,_that.balance,_that.label,_that.icon);case _:
   return orElse();
 
 }
@@ -176,10 +177,10 @@ return $default(_that.currency,_that.balance,_that.icon);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Currency currency,  double balance,  String icon)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Currency currency,  double balance,  String label,  String icon)  $default,) {final _that = this;
 switch (_that) {
 case _Asset():
-return $default(_that.currency,_that.balance,_that.icon);case _:
+return $default(_that.currency,_that.balance,_that.label,_that.icon);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +197,10 @@ return $default(_that.currency,_that.balance,_that.icon);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Currency currency,  double balance,  String icon)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Currency currency,  double balance,  String label,  String icon)?  $default,) {final _that = this;
 switch (_that) {
 case _Asset() when $default != null:
-return $default(_that.currency,_that.balance,_that.icon);case _:
+return $default(_that.currency,_that.balance,_that.label,_that.icon);case _:
   return null;
 
 }
@@ -211,11 +212,12 @@ return $default(_that.currency,_that.balance,_that.icon);case _:
 @JsonSerializable()
 
 class _Asset implements Asset {
-  const _Asset({required this.currency, required this.balance, required this.icon});
+  const _Asset({required this.currency, required this.balance, required this.label, required this.icon});
   factory _Asset.fromJson(Map<String, dynamic> json) => _$AssetFromJson(json);
 
 @override final  Currency currency;
 @override final  double balance;
+@override final  String label;
 @override final  String icon;
 
 /// Create a copy of Asset
@@ -231,16 +233,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Asset&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.balance, balance) || other.balance == balance)&&(identical(other.icon, icon) || other.icon == icon));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Asset&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.balance, balance) || other.balance == balance)&&(identical(other.label, label) || other.label == label)&&(identical(other.icon, icon) || other.icon == icon));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,currency,balance,icon);
+int get hashCode => Object.hash(runtimeType,currency,balance,label,icon);
 
 @override
 String toString() {
-  return 'Asset(currency: $currency, balance: $balance, icon: $icon)';
+  return 'Asset(currency: $currency, balance: $balance, label: $label, icon: $icon)';
 }
 
 
@@ -251,7 +253,7 @@ abstract mixin class _$AssetCopyWith<$Res> implements $AssetCopyWith<$Res> {
   factory _$AssetCopyWith(_Asset value, $Res Function(_Asset) _then) = __$AssetCopyWithImpl;
 @override @useResult
 $Res call({
- Currency currency, double balance, String icon
+ Currency currency, double balance, String label, String icon
 });
 
 
@@ -268,11 +270,12 @@ class __$AssetCopyWithImpl<$Res>
 
 /// Create a copy of Asset
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? currency = null,Object? balance = null,Object? icon = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? currency = null,Object? balance = null,Object? label = null,Object? icon = null,}) {
   return _then(_Asset(
 currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
 as Currency,balance: null == balance ? _self.balance : balance // ignore: cast_nullable_to_non_nullable
-as double,icon: null == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
+as double,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String,icon: null == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

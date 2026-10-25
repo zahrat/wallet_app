@@ -9,12 +9,14 @@ part of 'asset.dart';
 _Asset _$AssetFromJson(Map<String, dynamic> json) => _Asset(
   currency: $enumDecode(_$CurrencyEnumMap, json['currency']),
   balance: (json['balance'] as num).toDouble(),
+  label: json['label'] as String,
   icon: json['icon'] as String,
 );
 
 Map<String, dynamic> _$AssetToJson(_Asset instance) => <String, dynamic>{
   'currency': _$CurrencyEnumMap[instance.currency]!,
   'balance': instance.balance,
+  'label': instance.label,
   'icon': instance.icon,
 };
 
