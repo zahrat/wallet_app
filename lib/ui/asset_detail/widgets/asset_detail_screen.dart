@@ -21,21 +21,33 @@ class _AssetDetailScreenState extends ConsumerState<AssetDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final Asset asset = GoRouterState.of(context).extra! as Asset;
-    ref.watch(transactionViewModelProvider);
-    final balance = ref
+    final wallet = ref.watch(transactionViewModelProvider);
+    final getAssetBalance = ref
         .read(transactionViewModelProvider.notifier)
-        .getAssetBalance(asset.currency);
+        .getAssetBalance;
+    final balance = getAssetBalance(asset.currency);
+    final transactions = ref
+        .watch(transactionViewModelProvider.notifier)
+        .getTransactions(currency: asset.currency);
 
     return AppContainer(
-      body: Column(
-        spacing: Spacing.lg,
-        children: [
-          AssetDetailHeader(asset: asset),
-          AssetInfo(
-            balance: balance,
-            currentPrice: AssetViewModel.getAssetPrice(asset.currency),
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          spacing: Spacing.xxl,
+          children: [
+            AssetDetailHeader(asset: asset),
+            AssetInfo(
+              balance: balance,
+              currentPrice: AssetViewModel.getAssetPrice(asset.currency),
+            ),
+            TransactionList(
+              transactions: transactions,
+              walletAddress: wallet?.value?.address ?? '',
+              getAssetBalance: getAssetBalance,
+              label: "Transactions",
+            ),
+          ],
+        ),
       ),
     );
   }
