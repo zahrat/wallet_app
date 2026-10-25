@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceService {
-  static void setStringValue(String key, ThemeMode value) async {
+  static void setStringValue(String key, String value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(key, value.name);
+    prefs.setString(key, value);
   }
 
   static Future<String?> getStringValue(String key) async {
