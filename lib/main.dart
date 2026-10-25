@@ -5,6 +5,7 @@ import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/routing/app_router.dart';
 import 'package:wallet_app/ui/change_theme_button/view_models/change_theme_view_model.dart';
 import 'package:wallet_app/ui/core/theme/app_theme.dart';
+import 'package:wallet_app/ui/language/view_models/language_view_model.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -16,6 +17,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(changeThemeProvider);
+    final locale = ref.watch(langugeProvider);
 
     return MaterialApp.router(
       title: 'Flutter Demo',
@@ -23,7 +25,7 @@ class MyApp extends ConsumerWidget {
       darkTheme: darkTheme,
       themeMode: theme.value ?? ThemeMode.system,
       routerConfig: appRouter,
-
+      locale: locale.value ?? AppLocalizations.supportedLocales.first,
       localizationsDelegates: [
         AppLocalizations.delegate,
         ...GlobalMaterialLocalizations.delegates,

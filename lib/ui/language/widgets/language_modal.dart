@@ -1,25 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
 import 'package:wallet_app/ui/core/ui/app_text.dart';
+import 'package:wallet_app/ui/language/view_models/language_view_model.dart';
 
-class LanguageModal extends StatelessWidget {
+class LanguageModal extends ConsumerWidget {
   const LanguageModal({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final onChangeLanuage = ref.read(langugeProvider.notifier).onChangeLanuage;
+
+    void onClose() {
+      Navigator.pop(context);
+    }
+
     return BottomSheet(
-      onClosing: () => {},
+      onClosing: () {},
       builder: (context) {
-        return ListView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            return LanguageItem(
+        return ListView(
+          padding: EdgeInsetsGeometry.all(Spacing.xxl),
+          children: [
+            LanguageItem(
               name: "English",
               flag: "EN",
-              isLastItem: index == 1,
-            );
-          },
-          itemCount: 2,
-          padding: EdgeInsetsGeometry.all(Spacing.xxl),
+              isLastItem: false,
+              onTap: () {
+                onChangeLanuage(Locale('en'));
+                onClose();
+              },
+            ),
+            LanguageItem(
+              name: "فارسی",
+              flag: "FA",
+              isLastItem: true,
+              onTap: () {
+                onChangeLanuage(Locale('fa'));
+                onClose();
+              },
+            ),
+          ],
         );
       },
     );
@@ -31,11 +51,13 @@ class LanguageItem extends StatelessWidget {
     required this.name,
     this.isLastItem = false,
     required this.flag,
+    required this.onTap,
     super.key,
   });
   final String name;
   final String flag;
   final bool isLastItem;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +74,10 @@ class LanguageItem extends StatelessWidget {
                 backgroundColor: secondary,
                 child: AppText(text: flag),
               ),
-              AppText(text: name),
+              InkWell(
+                onTap: onTap,
+                child: AppText(text: name),
+              ),
             ],
           ),
           if (!isLastItem) SizedBox(height: Spacing.sm),
