@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
+import 'package:wallet_app/ui/change_theme_button/widgets/change_theme.dart';
 import 'package:wallet_app/ui/core/theme/app_colors.dart';
 import 'package:wallet_app/ui/core/theme/spacing.dart';
 import 'package:wallet_app/ui/core/ui/index.dart';
@@ -23,7 +24,7 @@ class ProfileHeader extends StatelessWidget {
               text: AppLocalizations.of(context)!.profile,
               style: textTheme.headlineLarge,
             ),
-            Icon(Icons.sunny),
+            ChangeTheme(),
           ],
         ),
         Container(
