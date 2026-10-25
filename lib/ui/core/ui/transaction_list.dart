@@ -78,7 +78,11 @@ class TransactionItem extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const AppText(text: "Sent Btc", style: TextStyles.listItemTitle),
+            AppText(
+              text:
+                  "${isSent ? 'Sent' : 'Recieved'} ${transaction.currency.name.toUpperCase()}",
+              style: TextStyles.listItemTitle,
+            ),
             AppText(
               text: isSent
                   ? "To ${transaction.to}"
