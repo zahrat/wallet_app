@@ -22,6 +22,13 @@ final GoRouter appRouter = GoRouter(
               builder: (context, state) => const HomeScreen(),
               path: AppRoutes.home.path,
               name: AppRoutes.home.name,
+              routes: [
+                GoRoute(
+                  path: 'transactions',
+                  name: 'transactions',
+                  builder: (context, state) => TransactionsScreen(),
+                ),
+              ],
             ),
           ],
         ),

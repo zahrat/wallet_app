@@ -21,13 +21,14 @@ class SectionLabel extends StatelessWidget {
             color: textTheme.headlineMedium?.color,
           ),
         ),
-        TextButton(
-          onPressed: onSeeAll,
-          child: const AppText(
-            text: "See All",
-            style: TextStyle(color: Colors.blue),
+        if (onSeeAll != null)
+          TextButton(
+            onPressed: onSeeAll,
+            child: const AppText(
+              text: "See All",
+              style: TextStyle(color: Colors.blue),
+            ),
           ),
-        ),
       ],
     );
   }
