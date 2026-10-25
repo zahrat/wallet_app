@@ -28,6 +28,11 @@ final GoRouter appRouter = GoRouter(
                   name: 'transactions',
                   builder: (context, state) => TransactionsScreen(),
                 ),
+                GoRoute(
+                  path: 'assetDetail',
+                  name: 'assetDetail',
+                  builder: (context, state) => AssetDetailScreen(),
+                ),
               ],
             ),
           ],

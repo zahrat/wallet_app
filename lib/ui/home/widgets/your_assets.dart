@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wallet_app/data/models/asset.dart';
 import 'package:wallet_app/data/models/currency.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
@@ -17,6 +18,10 @@ class YourAssets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void onTap(Asset asset) {
+      context.go('home/assetDetail');
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: Spacing.md,
@@ -28,7 +33,11 @@ class YourAssets extends StatelessWidget {
             itemBuilder: (context, index) {
               final asset = assets[index];
               final balance = getAssetBalance(asset.currency);
-              return CurrencyItem(asset: asset, balance: balance);
+              return CurrencyItem(
+                asset: asset,
+                balance: balance,
+                onTapAsset: () => onTap(asset),
+              );
             },
             itemCount: assets.length,
           ),
@@ -39,9 +48,15 @@ class YourAssets extends StatelessWidget {
 }
 
 class CurrencyItem extends StatelessWidget {
-  const CurrencyItem({super.key, required this.asset, required this.balance});
+  const CurrencyItem({
+    super.key,
+    required this.asset,
+    required this.balance,
+    this.onTapAsset,
+  });
   final Asset asset;
   final double balance;
+  final void Function()? onTapAsset;
 
   @override
   Widget build(BuildContext context) {
@@ -49,46 +64,49 @@ class CurrencyItem extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
-      child: Row(
-        spacing: Spacing.sm,
+      child: InkWell(
+        onTap: onTapAsset,
+        child: Row(
+          spacing: Spacing.sm,
 
-        children: [
-          CircleAvatar(
-            backgroundColor: secondaryColor,
-            child: AppImage(
-              imageUri: asset.icon,
-              width: 50,
-              height: 50,
-              isAsset: false,
+          children: [
+            CircleAvatar(
+              backgroundColor: secondaryColor,
+              child: AppImage(
+                imageUri: asset.icon,
+                width: 50,
+                height: 50,
+                isAsset: false,
+              ),
             ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppText(
-                text: asset.currency.name.toUpperCase(),
-                style: TextStyles.listItemTitle,
-              ),
-              AppText(
-                text: "${asset.balance} ${asset.currency.name.toUpperCase()}",
-                style: TextStyles.listItemDescription,
-              ),
-            ],
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppText(
-                  text: "\$${balance.toStringAsFixed(2)}",
+                  text: asset.currency.name.toUpperCase(),
                   style: TextStyles.listItemTitle,
+                ),
+                AppText(
+                  text: "${asset.balance} ${asset.currency.name.toUpperCase()}",
+                  style: TextStyles.listItemDescription,
                 ),
               ],
             ),
-          ),
-          const Icon(Icons.keyboard_arrow_right_outlined),
-        ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+
+                children: [
+                  AppText(
+                    text: "\$${balance.toStringAsFixed(2)}",
+                    style: TextStyles.listItemTitle,
+                  ),
+                ],
+              ),
+            ),
+            const Icon(Icons.keyboard_arrow_right_outlined),
+          ],
+        ),
       ),
     );
   }
