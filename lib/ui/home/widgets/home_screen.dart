@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wallet_app/providers/total_balance_provider.dart';
 import 'package:wallet_app/ui/core/theme/spacing.dart';
-import 'package:wallet_app/ui/core/ui/app_container.dart';
 import 'package:wallet_app/ui/core/ui/index.dart';
 import 'package:wallet_app/ui/home/view_models/home_view_model.dart';
 import 'package:wallet_app/ui/home/widgets/balance_section.dart';
@@ -16,7 +15,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final wallet = ref.watch(homeViewModelProvider);
-    print('HomeScreen build: wallet: $wallet');
+
     final getAssetBalance = ref
         .read(homeViewModelProvider.notifier)
         .getAssetBalance;
