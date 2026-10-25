@@ -21,7 +21,7 @@ class ChangeThemeViewModel extends AsyncNotifier<ThemeMode> {
     );
     SharedPreferenceService.setStringValue(
       "theme",
-      state.value ?? ThemeMode.system,
+      state.value?.name ?? ThemeMode.system.name,
     );
   }
 }
