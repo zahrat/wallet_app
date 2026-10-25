@@ -19,7 +19,7 @@ class YourAssets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void onTap(Asset asset) {
-      context.go('home/assetDetail');
+      context.go('home/assetDetail', extra: asset);
     }
 
     return Column(
