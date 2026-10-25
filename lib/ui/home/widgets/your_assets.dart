@@ -62,6 +62,8 @@ class CurrencyItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final secondaryColor = Theme.of(context).colorScheme.secondary;
 
+    final listItemStyles = Theme.of(context).extension<ListItemTextStyles>();
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
       child: InkWell(
@@ -84,11 +86,11 @@ class CurrencyItem extends StatelessWidget {
               children: [
                 AppText(
                   text: asset.currency.name.toUpperCase(),
-                  style: TextStyles.listItemTitle,
+                  style: listItemStyles!.listItemTitle,
                 ),
                 AppText(
                   text: "${asset.balance} ${asset.currency.name.toUpperCase()}",
-                  style: TextStyles.listItemDescription,
+                  style: listItemStyles.listItemDescription,
                 ),
               ],
             ),
@@ -99,7 +101,7 @@ class CurrencyItem extends StatelessWidget {
                 children: [
                   AppText(
                     text: "\$${balance.toStringAsFixed(2)}",
-                    style: TextStyles.listItemTitle,
+                    style: listItemStyles.listItemTitle,
                   ),
                 ],
               ),

@@ -6,11 +6,13 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.borderColor,
     required this.grayIcon,
     required this.grayText,
+    required this.secondView,
   });
 
   final Color borderColor;
   final Color grayIcon;
   final Color grayText;
+  final Color secondView;
 
   @override
   AppColors copyWith() {
@@ -18,6 +20,7 @@ class AppColors extends ThemeExtension<AppColors> {
       borderColor: borderColor,
       grayIcon: grayIcon,
       grayText: grayText,
+      secondView: secondView,
     );
   }
 
@@ -27,6 +30,7 @@ class AppColors extends ThemeExtension<AppColors> {
       borderColor: Color.lerp(borderColor, other.borderColor, t) ?? borderColor,
       grayIcon: Color.lerp(grayIcon, other.grayIcon, t) ?? grayIcon,
       grayText: Color.lerp(grayText, other.grayText, t) ?? grayText,
+      secondView: Color.lerp(secondView, other.secondView, t) ?? grayText,
     );
   }
 }

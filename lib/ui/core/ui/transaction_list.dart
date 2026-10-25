@@ -65,6 +65,8 @@ class TransactionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final listItemStyles = Theme.of(context).extension<ListItemTextStyles>();
+
     return Row(
       spacing: Spacing.sm,
       children: [
@@ -81,13 +83,13 @@ class TransactionItem extends StatelessWidget {
             AppText(
               text:
                   "${isSent ? 'Sent' : 'Recieved'} ${transaction.currency.name.toUpperCase()}",
-              style: TextStyles.listItemTitle,
+              style: listItemStyles!.listItemTitle,
             ),
             AppText(
               text: isSent
                   ? "To ${transaction.to}"
                   : "From ${transaction.from}",
-              style: TextStyles.listItemDescription,
+              style: listItemStyles.listItemDescription,
             ),
           ],
         ),
