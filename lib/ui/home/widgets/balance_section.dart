@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
 import 'package:wallet_app/ui/core/ui/index.dart';
 
@@ -9,6 +10,7 @@ class BalanceSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final localizations = AppLocalizations.of(context);
 
     return RoundedCard(
       child: Column(
@@ -17,7 +19,10 @@ class BalanceSection extends StatelessWidget {
           Row(
             spacing: Spacing.sm,
             children: [
-              AppText(text: "Total balance", style: textTheme.titleMedium),
+              AppText(
+                text: localizations!.totalBalace,
+                style: textTheme.titleMedium,
+              ),
               const Icon(Icons.remove_red_eye_outlined, size: 15),
             ],
           ),

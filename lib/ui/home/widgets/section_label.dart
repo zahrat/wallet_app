@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wallet_app/l10n/app_localizations.dart';
 
 import '../../core/ui/index.dart';
 
@@ -10,6 +11,7 @@ class SectionLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final localizations = AppLocalizations.of(context);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,8 +26,8 @@ class SectionLabel extends StatelessWidget {
         if (onSeeAll != null)
           TextButton(
             onPressed: onSeeAll,
-            child: const AppText(
-              text: "See All",
+            child: AppText(
+              text: localizations!.seeAll,
               style: TextStyle(color: Colors.blue),
             ),
           ),

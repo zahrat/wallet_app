@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wallet_app/data/models/asset.dart';
 import 'package:wallet_app/data/services/currency_service.dart';
+import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/asset_detail/view_models/asset_view_model.dart';
 import 'package:wallet_app/ui/asset_detail/widgets/asset_detail_header.dart';
 import 'package:wallet_app/ui/asset_detail/widgets/asset_info.dart';
@@ -30,6 +31,8 @@ class _AssetDetailScreenState extends ConsumerState<AssetDetailScreen> {
         .watch(transactionViewModelProvider.notifier)
         .getTransactions(currency: asset.currency);
 
+    final localizations = AppLocalizations.of(context);
+
     return AppContainer(
       body: SingleChildScrollView(
         child: Column(
@@ -44,7 +47,7 @@ class _AssetDetailScreenState extends ConsumerState<AssetDetailScreen> {
               transactions: transactions,
               walletAddress: wallet?.value?.address ?? '',
               getAssetBalance: getAssetBalance,
-              label: "Transactions",
+              label: localizations!.transactions,
             ),
           ],
         ),

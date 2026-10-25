@@ -145,6 +145,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Total Value'**
   String get totalValue;
+
+  /// No description provided for @yourAssets.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Assets'**
+  String get yourAssets;
+
+  /// No description provided for @recentTransactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Transactions'**
+  String get recentTransactions;
+
+  /// No description provided for @totalBalace.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Balance'**
+  String get totalBalace;
+
+  /// No description provided for @seeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'See All'**
+  String get seeAll;
+
+  /// No description provided for @transactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions'**
+  String get transactions;
 }
 
 class _AppLocalizationsDelegate

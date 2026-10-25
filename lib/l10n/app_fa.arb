@@ -6,5 +6,10 @@
   "send":"ارسال شده",
   "recieve":"دریافت شده",
   "currentPrice":"قیمت فعلی",
-  "totalValue":"ارزش کلی"
+  "totalValue":"ارزش کلی",
+  "yourAssets":"دارایی‌های شما",
+  "recentTransactions":"تراکنشهای اخیر",
+  "totalBalace":"مجموع دارایی‌های شما",
+  "seeAll":"مشاهده همه",
+  "transactions":"لیست تراکنشها"
 }

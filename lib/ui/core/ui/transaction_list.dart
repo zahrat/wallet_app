@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/data/models/currency.dart';
 import 'package:wallet_app/data/models/transaction.dart';
+import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
 import 'package:wallet_app/ui/home/widgets/section_label.dart';
 
@@ -23,10 +24,15 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionLabel(label: label ?? "Recent Transactions", onSeeAll: onSeeAll),
+        SectionLabel(
+          label: label ?? localizations!.recentTransactions,
+          onSeeAll: onSeeAll,
+        ),
         RoundedCard(
           child: ListView.separated(
             shrinkWrap: true,

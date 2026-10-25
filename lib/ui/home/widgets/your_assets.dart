@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wallet_app/data/models/asset.dart';
 import 'package:wallet_app/data/models/currency.dart';
+import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
 import 'package:wallet_app/ui/home/widgets/section_label.dart';
 
@@ -18,6 +19,8 @@ class YourAssets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     void onTap(Asset asset) {
       context.go('home/assetDetail', extra: asset);
     }
@@ -26,7 +29,7 @@ class YourAssets extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: Spacing.md,
       children: [
-        const SectionLabel(label: "Your Assets"),
+        SectionLabel(label: localizations!.yourAssets),
         RoundedCard(
           child: ListView.builder(
             shrinkWrap: true,

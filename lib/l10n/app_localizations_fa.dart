@@ -31,4 +31,19 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get totalValue => 'ارزش کلی';
+
+  @override
+  String get yourAssets => 'دارایی‌های شما';
+
+  @override
+  String get recentTransactions => 'تراکنشهای اخیر';
+
+  @override
+  String get totalBalace => 'مجموع دارایی‌های شما';
+
+  @override
+  String get seeAll => 'مشاهده همه';
+
+  @override
+  String get transactions => 'لیست تراکنشها';
 }

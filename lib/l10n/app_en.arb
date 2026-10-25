@@ -6,5 +6,10 @@
   "send":"Send",
   "recieve":"Recieve",
   "currentPrice":"Current Price",
-  "totalValue":"Total Value"
+  "totalValue":"Total Value",
+  "yourAssets":"Your Assets",
+  "recentTransactions":"Recent Transactions",
+  "totalBalace":"Total Balance",
+  "seeAll":"See All",
+  "transactions":"Transactions"
 }

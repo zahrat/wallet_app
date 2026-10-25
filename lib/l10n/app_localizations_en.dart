@@ -31,4 +31,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get totalValue => 'Total Value';
+
+  @override
+  String get yourAssets => 'Your Assets';
+
+  @override
+  String get recentTransactions => 'Recent Transactions';
+
+  @override
+  String get totalBalace => 'Total Balance';
+
+  @override
+  String get seeAll => 'See All';
+
+  @override
+  String get transactions => 'Transactions';
 }

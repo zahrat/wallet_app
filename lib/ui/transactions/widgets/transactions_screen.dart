@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wallet_app/data/models/currency.dart';
 import 'package:wallet_app/data/models/transaction.dart';
+import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
 import 'package:wallet_app/ui/core/ui/index.dart';
 import 'package:wallet_app/ui/transactions/constants/sort_enum.dart';
@@ -24,6 +25,8 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
   Currency? selectedAsset;
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     final wallet = ref.watch(transactionViewModelProvider);
     final getAssetBalance = ref
         .read(transactionViewModelProvider.notifier)
@@ -67,7 +70,7 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
               transactions: transactions,
               walletAddress: wallet.value?.address ?? '',
               getAssetBalance: getAssetBalance,
-              label: "Transactions",
+              label: localizations!.transactions,
             ),
           ],
         ),
