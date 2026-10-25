@@ -4,5 +4,7 @@
   "preferences":"Preferences",
   "all":"All",
   "send":"Send",
-  "recieve":"Recieve"
+  "recieve":"Recieve",
+  "currentPrice":"Current Price",
+  "totalValue":"Total Value"
 }

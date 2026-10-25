@@ -25,4 +25,10 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get recieve => 'دریافت شده';
+
+  @override
+  String get currentPrice => 'قیمت فعلی';
+
+  @override
+  String get totalValue => 'ارزش کلی';
 }

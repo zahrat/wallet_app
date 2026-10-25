@@ -4,5 +4,7 @@
   "preferences":"تنظیمات",
   "all":"همه",
   "send":"ارسال شده",
-  "recieve":"دریافت شده"
+  "recieve":"دریافت شده",
+  "currentPrice":"قیمت فعلی",
+  "totalValue":"ارزش کلی"
 }

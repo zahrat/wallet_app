@@ -133,6 +133,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recieve'**
   String get recieve;
+
+  /// No description provided for @currentPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Price'**
+  String get currentPrice;
+
+  /// No description provided for @totalValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Value'**
+  String get totalValue;
 }
 
 class _AppLocalizationsDelegate

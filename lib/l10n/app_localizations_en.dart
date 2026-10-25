@@ -25,4 +25,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recieve => 'Recieve';
+
+  @override
+  String get currentPrice => 'Current Price';
+
+  @override
+  String get totalValue => 'Total Value';
 }
