@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/ui/core/theme/app_colors_extension.dart';
-import 'package:wallet_app/ui/core/theme/app_fontsize.dart';
 import 'package:wallet_app/ui/core/theme/list_item_theme.dart';
 import 'package:wallet_app/ui/core/theme/sort_and_filter_theme.dart';
+import 'package:wallet_app/ui/core/theme/text_theme.dart';
 
 final lightTheme = ThemeData.light().copyWith(
   bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white),
@@ -24,34 +24,7 @@ final lightTheme = ThemeData.light().copyWith(
     onSurface: const Color.fromARGB(255, 241, 235, 235),
   ),
   iconTheme: IconThemeData(color: Color.fromARGB(186, 80, 80, 80), size: 20),
-  textTheme: const TextTheme(
-    bodyMedium: TextStyle(color: Colors.black, fontSize: AppFontsize.md),
-    bodySmall: TextStyle(
-      color: Color.fromARGB(255, 143, 142, 142),
-      fontSize: AppFontsize.sm,
-    ),
-    headlineMedium: TextStyle(color: Colors.black),
-    titleMedium: TextStyle(
-      color: Colors.black,
-      fontSize: AppFontsize.md,
-      fontWeight: FontWeight.bold,
-    ),
-    titleLarge: TextStyle(
-      color: Colors.black,
-      fontSize: AppFontsize.xl,
-      fontWeight: FontWeight.bold,
-    ),
-    titleSmall: TextStyle(
-      color: Colors.black,
-      fontSize: AppFontsize.sm,
-      fontWeight: FontWeight.bold,
-    ),
-    headlineLarge: TextStyle(
-      color: Colors.black,
-      fontSize: AppFontsize.xxl,
-      fontWeight: FontWeight.bold,
-    ),
-  ),
+  textTheme: lightTextTheme,
   scaffoldBackgroundColor: const Color.fromARGB(255, 241, 241, 241),
   navigationBarTheme: NavigationBarThemeData(
     surfaceTintColor: Color.fromARGB(179, 16, 16, 16),
@@ -106,38 +79,7 @@ final darkTheme = ThemeData.dark().copyWith(
 
   iconTheme: const IconThemeData(color: Color(0xFFB8B2BD), size: 20),
 
-  textTheme: const TextTheme(
-    bodyMedium: TextStyle(color: Color(0xFFECE8EF), fontSize: AppFontsize.md),
-
-    bodySmall: TextStyle(color: Color(0xFFAAA5AE), fontSize: AppFontsize.sm),
-
-    headlineMedium: TextStyle(color: Color(0xFFF5F1F7)),
-
-    titleMedium: TextStyle(
-      color: Color(0xFFF5F1F7),
-      fontSize: AppFontsize.md,
-      fontWeight: FontWeight.bold,
-    ),
-
-    titleLarge: TextStyle(
-      color: Color(0xFFF5F1F7),
-      fontSize: AppFontsize.xl,
-      fontWeight: FontWeight.bold,
-    ),
-
-    titleSmall: TextStyle(
-      color: Color(0xFFF5F1F7),
-      fontSize: AppFontsize.sm,
-      fontWeight: FontWeight.bold,
-    ),
-
-    headlineLarge: TextStyle(
-      color: Color(0xFFF5F1F7),
-      fontSize: AppFontsize.xxl,
-      fontWeight: FontWeight.bold,
-    ),
-  ),
-
+  textTheme: darkTextTheme,
   scaffoldBackgroundColor: const Color(0xFF121015),
 
   navigationBarTheme: NavigationBarThemeData(
