@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
-import 'package:wallet_app/ui/core/theme/app_colors.dart';
+import 'package:wallet_app/ui/core/theme/app_colors_extension.dart';
 import 'package:wallet_app/ui/core/ui/index.dart';
 
 class AssetInfo extends StatelessWidget {
@@ -16,7 +16,7 @@ class AssetInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     final textTheme = Theme.of(context).textTheme;
-    final colors = Theme.of(context).extension<AppColors>();
+    final colors = Theme.of(context).extension<AppColorsExtension>();
 
     return RoundedCard(
       child: Row(

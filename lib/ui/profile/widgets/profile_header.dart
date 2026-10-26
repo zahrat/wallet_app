@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/change_theme_button/widgets/change_theme.dart';
-import 'package:wallet_app/ui/core/theme/app_colors.dart';
+import 'package:wallet_app/ui/core/theme/app_colors_extension.dart';
 import 'package:wallet_app/ui/core/theme/spacing.dart';
 import 'package:wallet_app/ui/core/ui/index.dart';
 
@@ -12,7 +12,9 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    final AppColors appColors = Theme.of(context).extension<AppColors>()!;
+    final AppColorsExtension appColors = Theme.of(
+      context,
+    ).extension<AppColorsExtension>()!;
 
     return Column(
       spacing: Spacing.xxl,

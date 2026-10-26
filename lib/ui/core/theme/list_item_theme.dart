@@ -29,3 +29,31 @@ class ListItemTextStyles extends ThemeExtension<ListItemTextStyles> {
     );
   }
 }
+
+const lightListItemTextStyles = ListItemTextStyles(
+  listItemTitle: TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  ),
+
+  listItemDescription: TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+    color: Colors.blueGrey,
+  ),
+);
+
+const darkListItemTextStyles = ListItemTextStyles(
+  listItemTitle: TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  ),
+
+  listItemDescription: TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+    color: Color.fromARGB(255, 234, 241, 245),
+  ),
+);

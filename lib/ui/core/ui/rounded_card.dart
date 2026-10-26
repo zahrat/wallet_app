@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/ui/core/theme/app_colors.dart';
+import 'package:wallet_app/ui/core/theme/app_colors_extension.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
-import 'package:wallet_app/ui/core/theme/rounded_view_theme.dart';
 
 class RoundedCard extends StatelessWidget {
   const RoundedCard({required this.child, super.key});
@@ -9,7 +8,9 @@ class RoundedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bgColor = Theme.of(context).extension<AppColors>()!.secondView;
+    final bgColor = Theme.of(
+      context,
+    ).extension<AppColorsExtension>()!.secondView;
 
     return Container(
       padding: AppPadding.cardPadding,

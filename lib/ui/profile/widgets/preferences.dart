@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
-import 'package:wallet_app/ui/core/theme/app_colors.dart';
+import 'package:wallet_app/ui/core/theme/app_colors_extension.dart';
 import 'package:wallet_app/ui/core/theme/spacing.dart';
 import 'package:wallet_app/ui/core/ui/index.dart';
 import 'package:wallet_app/ui/language/view_models/language_view_model.dart';
@@ -18,7 +18,7 @@ class _PreferencesState extends ConsumerState<Preferences> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final appColors = Theme.of(context).extension<AppColors>();
+    final appColors = Theme.of(context).extension<AppColorsExtension>();
     final appLocalizations = AppLocalizations.of(context);
 
     final language = ref.watch(langugeProvider);

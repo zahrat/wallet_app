@@ -1,33 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/ui/core/theme/app_colors.dart';
+import 'package:wallet_app/ui/core/theme/app_colors_extension.dart';
 import 'package:wallet_app/ui/core/theme/app_fontsize.dart';
 import 'package:wallet_app/ui/core/theme/list_item_theme.dart';
-import 'package:wallet_app/ui/core/theme/rounded_view_theme.dart';
 import 'package:wallet_app/ui/core/theme/sort_and_filter_theme.dart';
 
 final lightTheme = ThemeData.light().copyWith(
   bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white),
   dividerTheme: DividerThemeData(color: Color.fromARGB(187, 202, 202, 202)),
   extensions: <ThemeExtension<dynamic>>[
-    const AppColors(
-      borderColor: Color.fromARGB(189, 224, 226, 227),
-      grayIcon: Color.fromARGB(187, 127, 129, 129),
-      grayText: Color.fromARGB(187, 127, 129, 129),
-      secondView: Colors.white,
-    ),
-    ListItemTextStyles(
-      listItemTitle: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.bold,
-        color: Colors.black,
-      ),
-
-      listItemDescription: TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.bold,
-        color: Colors.blueGrey,
-      ),
-    ),
+    lightAppColorExtension,
+    lightListItemTextStyles,
 
     SortAndFilterTheme(
       sortIconColor: Color.fromARGB(255, 185, 43, 237),
@@ -153,25 +135,8 @@ final darkTheme = ThemeData.dark().copyWith(
   dividerTheme: const DividerThemeData(color: Color(0xFF38343B)),
 
   extensions: <ThemeExtension<dynamic>>[
-    const AppColors(
-      borderColor: Color(0xFF38343B),
-      grayIcon: Color(0xFFAAA5AE),
-      grayText: Color(0xFFAAA5AE),
-      secondView: Color.fromARGB(255, 112, 111, 111),
-    ),
-    ListItemTextStyles(
-      listItemTitle: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
-      ),
-
-      listItemDescription: TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.bold,
-        color: const Color.fromARGB(255, 234, 241, 245),
-      ),
-    ),
+    darkAppColorExtension,
+    darkListItemTextStyles,
 
     SortAndFilterTheme(
       sortIconColor: const Color(0xFFF0DEF6),
