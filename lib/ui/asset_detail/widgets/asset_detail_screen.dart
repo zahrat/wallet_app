@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wallet_app/data/models/asset.dart';
-import 'package:wallet_app/data/services/currency_service.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/asset_detail/view_models/asset_view_model.dart';
 import 'package:wallet_app/ui/asset_detail/widgets/asset_detail_header.dart';
@@ -23,34 +22,38 @@ class _AssetDetailScreenState extends ConsumerState<AssetDetailScreen> {
   Widget build(BuildContext context) {
     final Asset asset = GoRouterState.of(context).extra! as Asset;
     final wallet = ref.watch(transactionViewModelProvider);
-    final getAssetBalance = ref
-        .read(transactionViewModelProvider.notifier)
-        .getAssetBalance;
-    final balance = getAssetBalance(asset.currency);
-    final transactions = ref
-        .watch(transactionViewModelProvider.notifier)
-        .getTransactions(currency: asset.currency);
-
     final localizations = AppLocalizations.of(context);
 
     return AppContainer(
-      body: SingleChildScrollView(
-        child: Column(
-          spacing: Spacing.xxl,
-          children: [
-            AssetDetailHeader(asset: asset),
-            AssetInfo(
-              balance: balance,
-              currentPrice: AssetViewModel.getAssetPrice(asset.currency),
+      body: AsyncValueView(
+        value: wallet,
+        data: (loadedWallet) {
+          final viewModel = ref.read(transactionViewModelProvider.notifier);
+          final getAssetBalance = viewModel.getAssetBalance;
+          final balance = getAssetBalance(asset.currency);
+          final transactions = viewModel.getTransactions(
+            currency: asset.currency,
+          );
+
+          return SingleChildScrollView(
+            child: Column(
+              spacing: Spacing.xxl,
+              children: [
+                AssetDetailHeader(asset: asset),
+                AssetInfo(
+                  balance: balance,
+                  currentPrice: AssetViewModel.getAssetPrice(asset.currency),
+                ),
+                TransactionList(
+                  transactions: transactions,
+                  walletAddress: loadedWallet.address,
+                  getAssetBalance: getAssetBalance,
+                  label: localizations!.transactions,
+                ),
+              ],
             ),
-            TransactionList(
-              transactions: transactions,
-              walletAddress: wallet?.value?.address ?? '',
-              getAssetBalance: getAssetBalance,
-              label: localizations!.transactions,
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
