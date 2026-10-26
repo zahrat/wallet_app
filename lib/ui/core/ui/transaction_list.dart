@@ -78,9 +78,12 @@ class TransactionItem extends StatelessWidget {
       children: [
         CircleAvatar(
           backgroundColor: isSent ? Colors.red[100] : Colors.green[100],
-          child: Icon(
-            Icons.arrow_outward,
-            color: isSent ? Colors.red : Colors.green,
+          child: Transform.rotate(
+            angle: isSent ? 0 : 45,
+            child: Icon(
+              Icons.arrow_outward,
+              color: isSent ? Colors.red : Colors.green,
+            ),
           ),
         ),
         Column(
