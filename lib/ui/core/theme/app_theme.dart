@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/ui/core/theme/app_colors_extension.dart';
 import 'package:wallet_app/ui/core/theme/list_item_theme.dart';
+import 'package:wallet_app/ui/core/theme/navigation_bar_theme.dart';
 import 'package:wallet_app/ui/core/theme/sort_and_filter_theme.dart';
 import 'package:wallet_app/ui/core/theme/text_theme.dart';
 
 final lightTheme = ThemeData.light().copyWith(
   bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white),
+
   dividerTheme: DividerThemeData(color: Color.fromARGB(187, 202, 202, 202)),
+
   extensions: <ThemeExtension<dynamic>>[
     lightAppColorExtension,
     lightListItemTextStyles,
     lightSortAndFilterTheme,
   ],
+
   colorScheme: ColorScheme(
     brightness: Brightness.light,
     primary: Color.fromARGB(255, 185, 43, 237),
@@ -23,28 +27,14 @@ final lightTheme = ThemeData.light().copyWith(
     surface: const Color.fromARGB(179, 244, 242, 242),
     onSurface: const Color.fromARGB(255, 241, 235, 235),
   ),
+
   iconTheme: IconThemeData(color: Color.fromARGB(186, 80, 80, 80), size: 20),
+
   textTheme: lightTextTheme,
+
   scaffoldBackgroundColor: const Color.fromARGB(255, 241, 241, 241),
-  navigationBarTheme: NavigationBarThemeData(
-    surfaceTintColor: Color.fromARGB(179, 16, 16, 16),
-    indicatorColor: Colors.white,
-    backgroundColor: Colors.white,
-    iconTheme: WidgetStateProperty.resolveWith<IconThemeData?>((states) {
-      if (states.contains(WidgetState.selected)) {
-        return const IconThemeData(color: Colors.black);
-      }
 
-      return const IconThemeData(color: Colors.grey);
-    }),
-    labelTextStyle: WidgetStateProperty.resolveWith<TextStyle?>((states) {
-      if (states.contains(WidgetState.selected)) {
-        return const TextStyle(color: Colors.black);
-      }
-
-      return const TextStyle(color: Colors.grey);
-    }),
-  ),
+  navigationBarTheme: lightNavigationBarTheme,
 );
 
 final darkTheme = ThemeData.dark().copyWith(
@@ -80,27 +70,8 @@ final darkTheme = ThemeData.dark().copyWith(
   iconTheme: const IconThemeData(color: Color(0xFFB8B2BD), size: 20),
 
   textTheme: darkTextTheme,
+
   scaffoldBackgroundColor: const Color(0xFF121015),
 
-  navigationBarTheme: NavigationBarThemeData(
-    surfaceTintColor: Colors.transparent,
-    indicatorColor: const Color(0xFF38283F),
-    backgroundColor: const Color(0xFF18151B),
-
-    iconTheme: WidgetStateProperty.resolveWith<IconThemeData?>((states) {
-      if (states.contains(WidgetState.selected)) {
-        return const IconThemeData(color: Color(0xFFF0DEF6));
-      }
-
-      return const IconThemeData(color: Color(0xFFAAA5AE));
-    }),
-
-    labelTextStyle: WidgetStateProperty.resolveWith<TextStyle?>((states) {
-      if (states.contains(WidgetState.selected)) {
-        return const TextStyle(color: Color(0xFFF0DEF6));
-      }
-
-      return const TextStyle(color: Color(0xFFAAA5AE));
-    }),
-  ),
+  navigationBarTheme: darkNavigationBarTheme,
 );
