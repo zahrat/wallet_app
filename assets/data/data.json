@@ -5,19 +5,19 @@
             "currency":"eth",
             "label":"Ethereum",
             "balance":123,
-            "icon":"https://download.logo.wine/logo/Ethereum/Ethereum-Logo.wine.png"
+            "icon":"https://cdn.ok-ex.io/coins/128/color/eth.png"
         },
         {
             "currency":"btc",
             "label":"Bitcoin",
             "balance":0.04,
-            "icon":"https://logos-world.net/wp-content/uploads/2020/08/Bitcoin-Logo.png"
+            "icon":"https://cdn.ok-ex.io/coins/128/color/btc.png"
         },
         {
             "currency":"usdt",
             "label":"Tether",
             "balance":43,
-            "icon":"https://cdn.iconscout.com/icon/free/png-256/free-usdt-logo-icon-svg-download-png-4498211.png"
+            "icon":"https://cdn.ok-ex.io/coins/128/color/usdt.png"
         }
     ],
     "transactions":[
