@@ -20,10 +20,13 @@ final lightTheme = ThemeData.light().copyWith(
     brightness: Brightness.light,
     primary: Color.fromARGB(255, 185, 43, 237),
     onPrimary: Color.fromARGB(255, 185, 54, 233),
+
     secondary: Color.fromARGB(255, 233, 213, 241),
     onSecondary: Color.fromARGB(255, 215, 193, 223),
+
     error: Colors.red,
     onError: Colors.red,
+
     surface: const Color.fromARGB(179, 244, 242, 242),
     onSurface: const Color.fromARGB(255, 241, 235, 235),
   ),
@@ -54,11 +57,11 @@ final darkTheme = ThemeData.dark().copyWith(
   colorScheme: const ColorScheme(
     brightness: Brightness.dark,
 
-    primary: Color(0xFFF0DEF6),
-    onPrimary: Color(0xFF25152B),
+    primary: Color.fromARGB(255, 185, 43, 237),
+    onPrimary: Color.fromARGB(255, 185, 54, 233),
 
-    secondary: Color(0xFFD8B5E5),
-    onSecondary: Color(0xFF291D2D),
+    secondary: Color.fromARGB(255, 233, 213, 241),
+    onSecondary: Color.fromARGB(255, 215, 193, 223),
 
     error: Color(0xFFFF6B6B),
     onError: Color(0xFF2B0808),
