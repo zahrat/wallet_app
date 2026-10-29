@@ -9,6 +9,10 @@ final lightTheme = ThemeData.light().copyWith(
   bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white),
 
   dividerTheme: DividerThemeData(color: Color.fromARGB(187, 202, 202, 202)),
+  appBarTheme: AppBarTheme(
+    titleTextStyle: lightTextTheme.titleMedium,
+    iconTheme: IconThemeData(color: Colors.black),
+  ),
 
   extensions: <ThemeExtension<dynamic>>[
     lightAppColorExtension,
@@ -47,6 +51,11 @@ final darkTheme = ThemeData.dark().copyWith(
   ),
 
   dividerTheme: const DividerThemeData(color: Color(0xFF38343B)),
+
+  appBarTheme: AppBarTheme(
+    titleTextStyle: lightTextTheme.titleMedium,
+    iconTheme: IconThemeData(color: Colors.black),
+  ),
 
   extensions: <ThemeExtension<dynamic>>[
     darkAppColorExtension,

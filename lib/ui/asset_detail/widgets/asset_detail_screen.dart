@@ -25,6 +25,7 @@ class _AssetDetailScreenState extends ConsumerState<AssetDetailScreen> {
     final localizations = AppLocalizations.of(context);
 
     return AppContainer(
+      pageTitle: localizations!.assetDetail,
       body: AsyncValueView(
         value: wallet,
         data: (loadedWallet) {
