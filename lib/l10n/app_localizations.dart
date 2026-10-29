@@ -175,6 +175,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Transactions'**
   String get transactions;
+
+  /// No description provided for @assetDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Asset Detail'**
+  String get assetDetail;
 }
 
 class _AppLocalizationsDelegate

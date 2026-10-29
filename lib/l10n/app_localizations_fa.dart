@@ -46,4 +46,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get transactions => 'لیست تراکنشها';
+
+  @override
+  String get assetDetail => 'جزییات دارایی';
 }

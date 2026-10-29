@@ -11,5 +11,6 @@
   "recentTransactions":"Recent Transactions",
   "totalBalace":"Total Balance",
   "seeAll":"See All",
-  "transactions":"Transactions"
+  "transactions":"Transactions",
+  "assetDetail":"Asset Detail"
 }

@@ -11,5 +11,6 @@
   "recentTransactions":"تراکنشهای اخیر",
   "totalBalace":"مجموع دارایی‌های شما",
   "seeAll":"مشاهده همه",
-  "transactions":"لیست تراکنشها"
+  "transactions":"لیست تراکنشها",
+  "assetDetail":"جزییات دارایی"
 }
