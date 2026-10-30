@@ -11,39 +11,49 @@ class ScaffoldWithNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).extension<AppColorsExtension>();
 
-    return Scaffold(
-      body: navigationShell,
-      bottomNavigationBar: SafeArea(
-        child: Container(
-          height: 50,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            border: Border(
-              top: BorderSide(color: colors!.grayText, width: 0.08),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? m) {
+        if (navigationShell.currentIndex == 0) {
+          Navigator.pop(context);
+        } else {
+          navigationShell.goBranch(0);
+        }
+      },
+      child: Scaffold(
+        body: navigationShell,
+        bottomNavigationBar: SafeArea(
+          child: Container(
+            height: 50,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(color: colors!.grayText, width: 0.08),
+              ),
             ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              BottomTabItem(
-                navigationShell: navigationShell,
-                acitveIconData: Icons.home_rounded,
-                deActiveIconData: Icons.home_outlined,
-                index: 0,
-              ),
-              BottomTabItem(
-                navigationShell: navigationShell,
-                acitveIconData: Icons.receipt_rounded,
-                deActiveIconData: Icons.receipt_outlined,
-                index: 1,
-              ),
-              BottomTabItem(
-                navigationShell: navigationShell,
-                acitveIconData: Icons.account_circle,
-                deActiveIconData: Icons.account_circle_outlined,
-                index: 2,
-              ),
-            ],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                BottomTabItem(
+                  navigationShell: navigationShell,
+                  acitveIconData: Icons.home_rounded,
+                  deActiveIconData: Icons.home_outlined,
+                  index: 0,
+                ),
+                BottomTabItem(
+                  navigationShell: navigationShell,
+                  acitveIconData: Icons.receipt_rounded,
+                  deActiveIconData: Icons.receipt_outlined,
+                  index: 1,
+                ),
+                BottomTabItem(
+                  navigationShell: navigationShell,
+                  acitveIconData: Icons.account_circle,
+                  deActiveIconData: Icons.account_circle_outlined,
+                  index: 2,
+                ),
+              ],
+            ),
           ),
         ),
       ),
