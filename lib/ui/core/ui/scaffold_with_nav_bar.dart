@@ -33,9 +33,15 @@ class ScaffoldWithNavBar extends StatelessWidget {
               ),
               BottomTabItem(
                 navigationShell: navigationShell,
+                acitveIconData: Icons.receipt_rounded,
+                deActiveIconData: Icons.receipt_outlined,
+                index: 1,
+              ),
+              BottomTabItem(
+                navigationShell: navigationShell,
                 acitveIconData: Icons.account_circle,
                 deActiveIconData: Icons.account_circle_outlined,
-                index: 1,
+                index: 2,
               ),
             ],
           ),

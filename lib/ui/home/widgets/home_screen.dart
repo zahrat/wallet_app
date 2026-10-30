@@ -40,7 +40,7 @@ class HomeScreen extends ConsumerWidget {
               transactions: wallet.value?.transactions?.sublist(0, 3) ?? [],
               walletAddress: wallet.value?.address ?? '',
               getAssetBalance: getAssetBalance,
-              onSeeAll: () => context.go('home/transactions'),
+              onSeeAll: () => StatefulNavigationShell.of(context).goBranch(1),
             ),
           ],
         ),

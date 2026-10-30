@@ -24,16 +24,20 @@ final GoRouter appRouter = GoRouter(
               name: AppRoutes.home.name,
               routes: [
                 GoRoute(
-                  path: 'transactions',
-                  name: 'transactions',
-                  builder: (context, state) => TransactionsScreen(),
-                ),
-                GoRoute(
                   path: 'assetDetail',
                   name: 'assetDetail',
                   builder: (context, state) => AssetDetailScreen(),
                 ),
               ],
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: <RouteBase>[
+            GoRoute(
+              builder: (context, state) => const TransactionsScreen(),
+              path: AppRoutes.transactions.path,
+              name: AppRoutes.transactions.name,
             ),
           ],
         ),
