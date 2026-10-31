@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wallet_app/extensions/number_extension.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
 import 'package:wallet_app/ui/core/ui/index.dart';
@@ -26,7 +27,10 @@ class BalanceSection extends StatelessWidget {
               const Icon(Icons.remove_red_eye_outlined, size: 15),
             ],
           ),
-          AppText(text: '\$${balance.toString()}', style: textTheme.titleLarge),
+          AppText(
+            text: '\$${balance.separateByComma()}',
+            style: textTheme.titleLarge,
+          ),
         ],
       ),
     );

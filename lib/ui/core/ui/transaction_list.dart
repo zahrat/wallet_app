@@ -1,6 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:wallet_app/data/models/currency.dart';
 import 'package:wallet_app/data/models/transaction.dart';
+import 'package:wallet_app/extensions/number_extension.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
 import 'package:wallet_app/ui/home/widgets/section_label.dart';
@@ -112,7 +115,8 @@ class TransactionItem extends StatelessWidget {
                     "${isSent ? '-' : '+'}${transaction.value} ${transaction.currency.name.toUpperCase()}",
               ),
               AppText(
-                text: "\$${balance.toStringAsFixed(2)}",
+                text:
+                    "\$${double.parse(balance.toStringAsFixed(2)).separateByComma()}",
                 style: TextStyle(color: Colors.blueGrey),
               ),
             ],
