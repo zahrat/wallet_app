@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +10,15 @@ import 'package:wallet_app/ui/core/theme/app_theme.dart';
 import 'package:wallet_app/ui/language/view_models/language_view_model.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MyApp()));
+  runZonedGuarded(
+    () {
+      runApp(const ProviderScope(child: MyApp()));
+    },
+    (error, stackTrace) {
+      print('${error}');
+      print('${stackTrace}');
+    },
+  );
 }
 
 class MyApp extends ConsumerWidget {
