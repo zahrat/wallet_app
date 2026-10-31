@@ -84,7 +84,13 @@ class BottomTabItem extends StatelessWidget {
             : deActiveIconData,
         size: 30,
       ),
-      onPressed: () => navigationShell.goBranch(index),
+      onPressed: () {
+        if (index == navigationShell.currentIndex) {
+          navigationShell.goBranch(index, initialLocation: true);
+        } else {
+          navigationShell.goBranch(index);
+        }
+      },
     );
   }
 }
