@@ -3,16 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wallet_app/ui/change_theme_button/view_models/change_theme_view_model.dart';
 import 'package:wallet_app/ui/core/ui/index.dart';
 
-class ChangeTheme extends ConsumerStatefulWidget {
+class ChangeTheme extends ConsumerWidget {
   const ChangeTheme({super.key});
 
   @override
-  ConsumerState<ChangeTheme> createState() => _ChangeThemeState();
-}
-
-class _ChangeThemeState extends ConsumerState<ChangeTheme> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(changeThemeProvider);
     final onSwitchTheme = ref.read(changeThemeProvider.notifier).onSwitchTheme;
 
