@@ -15,7 +15,7 @@ class ChangeThemeViewModel extends AsyncNotifier<ThemeMode> {
         : ThemeMode.system;
   }
 
-  void onSwitchTheme() async {
+  Future<void> onSwitchTheme() async {
     state = AsyncData(
       state.value == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark,
     );
