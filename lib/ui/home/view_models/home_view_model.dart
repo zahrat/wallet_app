@@ -26,9 +26,9 @@ class HomeViewModel extends AsyncNotifier<WalletModel> {
       orElse: () => throw Exception('Asset not found'),
     );
 
-    final currencyPrice = await ref
-        .read(currencyRepositoryProvider)
-        .fetchCurryncyPrice(currency);
+    final currencyPrice = await ref.watch(
+      currencyRepositoryProvider(currency).future,
+    );
 
     return asset.balance * currencyPrice;
   }

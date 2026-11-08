@@ -9,9 +9,9 @@ final totalBalanceProvider = FutureProvider<double>((ref) async {
   final assets = wallet.assets;
   if (assets.isEmpty) return 0;
   for (final asset in assets) {
-    final price = await ref
-        .watch(currencyRepositoryProvider)
-        .fetchCurryncyPrice(asset.currency);
+    final price = await ref.watch(
+      currencyRepositoryProvider(asset.currency).future,
+    );
 
     totalBalance += asset.balance * price;
   }
