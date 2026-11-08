@@ -8,6 +8,6 @@ class WalletServiceImp implements WalletService {
   @override
   Future<dynamic> fetchWalletInfo() async {
     final response = await rootBundle.loadString('assets/data/data.json');
-    return response;
+    return Future.delayed(Duration(seconds: 5), () => response);
   }
 }

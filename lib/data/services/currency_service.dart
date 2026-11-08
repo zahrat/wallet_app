@@ -1,13 +1,13 @@
 class CurrencyService {
-  static double fetchEthCurrentPrice() {
-    return 2700;
+  static Future<double> fetchEthCurrentPrice() {
+    return Future.delayed(Duration(seconds: 5), () => 2700);
   }
 
-  static double fetchBtcCurrentPrice() {
-    return 85000;
+  static Future<double> fetchBtcCurrentPrice() {
+    return Future.delayed(Duration(seconds: 5), () => 85000);
   }
 
-  static double fetchUsdtPrice() {
-    return 0.9999;
+  static Future<double> fetchUsdtPrice() {
+    return Future.delayed(Duration(seconds: 5), () => 0.9999);
   }
 }
