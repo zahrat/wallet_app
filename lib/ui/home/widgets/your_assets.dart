@@ -16,7 +16,7 @@ class YourAssets extends StatelessWidget {
     required this.getAssetBalance,
   });
   final List<Asset> assets;
-  final double Function(Currency currency) getAssetBalance;
+  final Future<double> Function(Currency currency) getAssetBalance;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +35,21 @@ class YourAssets extends StatelessWidget {
           child: ListView.builder(
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              final asset = assets[index];
-              final balance = getAssetBalance(asset.currency);
-              return CurrencyItem(
-                asset: asset,
-                balance: balance,
-                onTapAsset: () => onTap(asset),
+              return FutureBuilder(
+                future: getAssetBalance(assets[index].currency),
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                      final asset = assets[index];
+                      final balance = snapshot.data;
+
+                      return CurrencyItem(
+                        asset: asset,
+                        balance: snapshot.hasData ? balance : 0,
+                        onTapAsset: () => onTap(asset),
+                        loadingBalance:
+                            snapshot.connectionState == ConnectionState.waiting,
+                      );
+                    },
               );
             },
             itemCount: assets.length,
@@ -57,10 +66,12 @@ class CurrencyItem extends StatelessWidget {
     required this.asset,
     required this.balance,
     this.onTapAsset,
+    this.loadingBalance = true,
   });
   final Asset asset;
   final double balance;
   final void Function()? onTapAsset;
+  final bool loadingBalance;
 
   @override
   Widget build(BuildContext context) {
@@ -103,11 +114,16 @@ class CurrencyItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
 
                 children: [
-                  AppText(
-                    text:
-                        "\$${double.parse(balance.toStringAsFixed(2)).separateByComma()}",
-                    style: listItemStyles.listItemTitle,
-                  ),
+                  loadingBalance
+                      ? const Center(
+                          heightFactor: 2,
+                          child: CircularProgressIndicator(),
+                        )
+                      : AppText(
+                          text:
+                              "\$${double.parse(balance.toStringAsFixed(2)).separateByComma()}",
+                          style: listItemStyles.listItemTitle,
+                        ),
                 ],
               ),
             ),
