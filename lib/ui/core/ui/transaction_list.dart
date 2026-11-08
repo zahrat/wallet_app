@@ -21,7 +21,7 @@ class TransactionList extends StatelessWidget {
   });
   final List<Transaction> transactions;
   final String walletAddress;
-  final double Function(Currency currency) getAssetBalance;
+  final Future<double> Function(Currency currency) getAssetBalance;
   final String? label;
   final void Function()? onSeeAll;
 
@@ -43,14 +43,22 @@ class TransactionList extends StatelessWidget {
             itemCount: transactions.length,
             separatorBuilder: (context, index) => const Divider(),
             itemBuilder: (context, index) {
-              final transaction = transactions[index];
-              final isSent = transaction.from == walletAddress;
-              final balance = getAssetBalance(transaction.currency);
+              return FutureBuilder(
+                future: getAssetBalance(transactions[index].currency),
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                      final transaction = transactions[index];
+                      final isSent = transaction.from == walletAddress;
+                      final balance = snapshot.data;
 
-              return TransactionItem(
-                transaction: transaction,
-                isSent: isSent,
-                balance: balance,
+                      return TransactionItem(
+                        transaction: transaction,
+                        isSent: isSent,
+                        balance: snapshot.hasData ? balance : 0,
+                        loadingBalance:
+                            snapshot.connectionState == ConnectionState.waiting,
+                      );
+                    },
               );
             },
           ),
@@ -66,11 +74,13 @@ class TransactionItem extends StatelessWidget {
     required this.transaction,
     required this.isSent,
     required this.balance,
+    this.loadingBalance = true,
   });
 
   final Transaction transaction;
   final bool isSent;
   final double balance;
+  final bool loadingBalance;
 
   @override
   Widget build(BuildContext context) {
@@ -114,11 +124,16 @@ class TransactionItem extends StatelessWidget {
                 text:
                     "${isSent ? '-' : '+'}${transaction.value} ${transaction.currency.name.toUpperCase()}",
               ),
-              AppText(
-                text:
-                    "\$${double.parse(balance.toStringAsFixed(2)).separateByComma()}",
-                style: TextStyle(color: Colors.blueGrey),
-              ),
+              loadingBalance
+                  ? const Center(
+                      heightFactor: 2,
+                      child: CircularProgressIndicator(),
+                    )
+                  : AppText(
+                      text:
+                          "\$${double.parse(balance.toStringAsFixed(2)).separateByComma()}",
+                      style: TextStyle(color: Colors.blueGrey),
+                    ),
             ],
           ),
         ),
