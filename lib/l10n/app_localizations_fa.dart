@@ -49,4 +49,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get assetDetail => 'جزییات دارایی';
+
+  @override
+  String get loadingWalletData => 'در حال دریافت اطلاعات کیف پول ...';
 }

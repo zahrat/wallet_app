@@ -3,10 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wallet_app/ui/core/ui/index.dart';
 
 class AsyncValueView<T> extends StatelessWidget {
-  const AsyncValueView({required this.value, required this.data, super.key});
+  const AsyncValueView({
+    required this.value,
+    required this.data,
+    this.loadWidget,
+    super.key,
+  });
 
   final AsyncValue<T> value;
   final Widget Function(T data) data;
+  final Widget? loadWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,11 @@ class AsyncValueView<T> extends StatelessWidget {
       skipLoadingOnRefresh: true,
       data: data,
       loading: () =>
-          const Center(heightFactor: 2, child: CircularProgressIndicator()),
+          loadWidget ??
+          const Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [LoadIndicator()],
+          ),
       error: (error, _) => AppText(text: error.toString(), style: errorStyle),
     );
   }

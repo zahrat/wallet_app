@@ -12,5 +12,6 @@
   "totalBalace":"Total Balance",
   "seeAll":"See All",
   "transactions":"Transactions",
-  "assetDetail":"Asset Detail"
+  "assetDetail":"Asset Detail",
+  "loadingWalletData":"Loading wallet data..."
 }

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wallet_app/extensions/number_extension.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
 import 'package:wallet_app/ui/core/ui/index.dart';
 
 class BalanceSection extends StatelessWidget {
-  const BalanceSection({super.key, required this.balance});
-  final double balance;
+  const BalanceSection({super.key, required this.balanceAsync});
+  final AsyncValue<double> balanceAsync;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +28,12 @@ class BalanceSection extends StatelessWidget {
               const Icon(Icons.remove_red_eye_outlined, size: 15),
             ],
           ),
-          AppText(
-            text: '\$${balance.separateByComma()}',
-            style: textTheme.titleLarge,
+          AsyncValueView<double>(
+            value: balanceAsync,
+            data: (balance) => AppText(
+              text: '\$${balance.separateByComma()}',
+              style: textTheme.titleLarge,
+            ),
           ),
         ],
       ),

@@ -85,49 +85,52 @@ class CurrencyItem extends StatelessWidget {
         onTap: onTapAsset,
         child: Row(
           spacing: Spacing.sm,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
           children: [
-            CircleAvatar(
-              backgroundColor: secondaryColor,
-              child: AppImage(
-                imageUri: asset.icon,
-                width: 50,
-                height: 50,
-                isAsset: false,
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
+              spacing: Spacing.sm,
               children: [
-                AppText(
-                  text: asset.currency.name.toUpperCase(),
-                  style: listItemStyles!.listItemTitle,
+                CircleAvatar(
+                  backgroundColor: secondaryColor,
+                  child: AppImage(
+                    imageUri: asset.icon,
+                    width: 50,
+                    height: 50,
+                    isAsset: false,
+                  ),
                 ),
-                AppText(
-                  text: "${asset.balance} ${asset.currency.name.toUpperCase()}",
-                  style: listItemStyles.listItemDescription,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppText(
+                      text: asset.currency.name.toUpperCase(),
+                      style: listItemStyles!.listItemTitle,
+                    ),
+                    AppText(
+                      text:
+                          "${asset.balance} ${asset.currency.name.toUpperCase()}",
+                      style: listItemStyles.listItemDescription,
+                    ),
+                  ],
                 ),
               ],
             ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
 
-                children: [
-                  loadingBalance
-                      ? const Center(
-                          heightFactor: 2,
-                          child: CircularProgressIndicator(),
-                        )
-                      : AppText(
-                          text:
-                              "\$${double.parse(balance.toStringAsFixed(2)).separateByComma()}",
-                          style: listItemStyles.listItemTitle,
-                        ),
-                ],
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+
+              children: [
+                loadingBalance
+                    ? const LoadIndicator()
+                    : AppText(
+                        text:
+                            "\$${double.parse(balance.toStringAsFixed(2)).separateByComma()}",
+                        style: listItemStyles.listItemTitle,
+                      ),
+                const Icon(Icons.keyboard_arrow_right_outlined),
+              ],
             ),
-            const Icon(Icons.keyboard_arrow_right_outlined),
           ],
         ),
       ),

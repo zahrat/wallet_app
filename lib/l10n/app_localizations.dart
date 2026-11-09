@@ -181,6 +181,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Asset Detail'**
   String get assetDetail;
+
+  /// No description provided for @loadingWalletData.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading wallet data...'**
+  String get loadingWalletData;
 }
 
 class _AppLocalizationsDelegate

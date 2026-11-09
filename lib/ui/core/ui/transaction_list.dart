@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:wallet_app/data/models/currency.dart';
 import 'package:wallet_app/data/models/transaction.dart';
@@ -88,54 +86,54 @@ class TransactionItem extends StatelessWidget {
 
     return Row(
       spacing: Spacing.sm,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CircleAvatar(
-          backgroundColor: isSent ? Colors.red[100] : Colors.green[100],
-          child: Transform.rotate(
-            angle: isSent ? 0 : 45,
-            child: Icon(
-              Icons.arrow_outward,
-              color: isSent ? Colors.red : Colors.green,
-            ),
-          ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Row(
+          spacing: Spacing.sm,
           children: [
-            AppText(
-              text:
-                  "${isSent ? 'Sent' : 'Recieved'} ${transaction.currency.name.toUpperCase()}",
-              style: listItemStyles!.listItemTitle,
+            CircleAvatar(
+              backgroundColor: isSent ? Colors.red[100] : Colors.green[100],
+              child: Transform.rotate(
+                angle: isSent ? 0 : 45,
+                child: Icon(
+                  Icons.arrow_outward,
+                  color: isSent ? Colors.red : Colors.green,
+                ),
+              ),
             ),
-            AppText(
-              text: isSent
-                  ? "To ${transaction.to}"
-                  : "From ${transaction.from}",
-              style: listItemStyles.listItemDescription,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppText(
+                  text:
+                      "${isSent ? 'Sent' : 'Recieved'} ${transaction.currency.name.toUpperCase()}",
+                  style: listItemStyles!.listItemTitle,
+                ),
+                AppText(
+                  text: isSent
+                      ? "To ${transaction.to}"
+                      : "From ${transaction.from}",
+                  style: listItemStyles.listItemDescription,
+                ),
+              ],
             ),
           ],
         ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-
-            children: [
-              AppText(
-                text:
-                    "${isSent ? '-' : '+'}${transaction.value} ${transaction.currency.name.toUpperCase()}",
-              ),
-              loadingBalance
-                  ? const Center(
-                      heightFactor: 2,
-                      child: CircularProgressIndicator(),
-                    )
-                  : AppText(
-                      text:
-                          "\$${double.parse(balance.toStringAsFixed(2)).separateByComma()}",
-                      style: TextStyle(color: Colors.blueGrey),
-                    ),
-            ],
-          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            AppText(
+              text:
+                  "${isSent ? '-' : '+'}${transaction.value} ${transaction.currency.name.toUpperCase()}",
+            ),
+            loadingBalance
+                ? const LoadIndicator()
+                : AppText(
+                    text:
+                        "\$${double.parse(balance.toStringAsFixed(2)).separateByComma()}",
+                    style: TextStyle(color: Colors.blueGrey),
+                  ),
+          ],
         ),
       ],
     );
