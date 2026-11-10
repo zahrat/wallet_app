@@ -52,4 +52,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loadingWalletData => 'Loading wallet data...';
+
+  @override
+  String get retry => 'Retry';
 }

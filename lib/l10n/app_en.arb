@@ -13,5 +13,6 @@
   "seeAll":"See All",
   "transactions":"Transactions",
   "assetDetail":"Asset Detail",
-  "loadingWalletData":"Loading wallet data..."
+  "loadingWalletData":"Loading wallet data...",
+  "retry":"Retry"
 }

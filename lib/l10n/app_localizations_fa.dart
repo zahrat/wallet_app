@@ -52,4 +52,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get loadingWalletData => 'در حال دریافت اطلاعات کیف پول ...';
+
+  @override
+  String get retry => 'تلاش مجدد';
 }
