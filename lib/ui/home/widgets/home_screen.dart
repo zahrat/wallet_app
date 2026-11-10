@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
+import 'package:wallet_app/data/repositories/wallet_repository.dart';
 import 'package:wallet_app/providers/total_balance_provider.dart';
+import 'package:wallet_app/providers/wallet_provider.dart';
 import 'package:wallet_app/ui/core/theme/spacing.dart';
 import 'package:wallet_app/ui/core/ui/index.dart';
 import 'package:wallet_app/ui/home/view_models/home_view_model.dart';
@@ -29,19 +31,22 @@ class HomeScreen extends ConsumerWidget {
       body: SingleChildScrollView(
         child: AsyncValueView(
           value: wallet,
-          loadWidget: Expanded(
-            child: Column(
-              spacing: Spacing.lg,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 50),
-                SpinKitFoldingCube(color: Colors.blue, size: 25),
-                AppText(
-                  text: localization!.loadingWalletData,
-                  style: textTitleStyle,
-                ),
-              ],
-            ),
+          onRetry: () {
+            ref.read(walletRepositoryProvider).disableShowException();
+            ref.invalidate(walletProvider);
+            ref.invalidate(homeViewModelProvider);
+          },
+          loadWidget: Column(
+            spacing: Spacing.lg,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 50),
+              SpinKitFoldingCube(color: Colors.blue, size: 25),
+              AppText(
+                text: localization!.loadingWalletData,
+                style: textTitleStyle,
+              ),
+            ],
           ),
           data: (wallet) => Column(
             spacing: Spacing.lg,

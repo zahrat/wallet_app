@@ -12,7 +12,9 @@ import 'package:wallet_app/ui/language/view_models/language_view_model.dart';
 void main() {
   runZonedGuarded(
     () {
-      runApp(const ProviderScope(child: MyApp()));
+      runApp(
+        ProviderScope(retry: (retryCount, error) => null, child: const MyApp()),
+      );
     },
     (error, stackTrace) {
       print('${error}');
