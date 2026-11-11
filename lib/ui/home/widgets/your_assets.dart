@@ -5,6 +5,7 @@ import 'package:wallet_app/data/models/currency.dart';
 import 'package:wallet_app/extensions/number_extension.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
+import 'package:wallet_app/ui/core/ui/list_empty_state.dart';
 import 'package:wallet_app/ui/home/widgets/section_label.dart';
 
 import '../../core/ui/index.dart';
@@ -16,7 +17,7 @@ class YourAssets extends StatelessWidget {
     required this.getAssetBalance,
   });
   final List<Asset> assets;
-  final double Function(Currency currency) getAssetBalance;
+  final Future<double> Function(Currency currency) getAssetBalance;
 
   @override
   Widget build(BuildContext context) {
@@ -32,19 +33,34 @@ class YourAssets extends StatelessWidget {
       children: [
         SectionLabel(label: localizations!.yourAssets),
         RoundedCard(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              final asset = assets[index];
-              final balance = getAssetBalance(asset.currency);
-              return CurrencyItem(
-                asset: asset,
-                balance: balance,
-                onTapAsset: () => onTap(asset),
-              );
-            },
-            itemCount: assets.length,
-          ),
+          child: assets.isEmpty
+              ? Center(child: ListEmptyState())
+              : ListView.builder(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return FutureBuilder(
+                      future: getAssetBalance(assets[index].currency),
+                      builder:
+                          (
+                            BuildContext context,
+                            AsyncSnapshot<dynamic> snapshot,
+                          ) {
+                            final asset = assets[index];
+                            final balance = snapshot.data;
+
+                            return CurrencyItem(
+                              asset: asset,
+                              balance: snapshot.hasData ? balance : 0,
+                              onTapAsset: () => onTap(asset),
+                              loadingBalance:
+                                  snapshot.connectionState ==
+                                  ConnectionState.waiting,
+                            );
+                          },
+                    );
+                  },
+                  itemCount: assets.length,
+                ),
         ),
       ],
     );
@@ -57,10 +73,12 @@ class CurrencyItem extends StatelessWidget {
     required this.asset,
     required this.balance,
     this.onTapAsset,
+    this.loadingBalance = true,
   });
   final Asset asset;
   final double balance;
   final void Function()? onTapAsset;
+  final bool loadingBalance;
 
   @override
   Widget build(BuildContext context) {
@@ -74,44 +92,52 @@ class CurrencyItem extends StatelessWidget {
         onTap: onTapAsset,
         child: Row(
           spacing: Spacing.sm,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
           children: [
-            CircleAvatar(
-              backgroundColor: secondaryColor,
-              child: AppImage(
-                imageUri: asset.icon,
-                width: 50,
-                height: 50,
-                isAsset: false,
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
+              spacing: Spacing.sm,
               children: [
-                AppText(
-                  text: asset.currency.name.toUpperCase(),
-                  style: listItemStyles!.listItemTitle,
+                CircleAvatar(
+                  backgroundColor: secondaryColor,
+                  child: AppImage(
+                    imageUri: asset.icon,
+                    width: 50,
+                    height: 50,
+                    isAsset: false,
+                  ),
                 ),
-                AppText(
-                  text: "${asset.balance} ${asset.currency.name.toUpperCase()}",
-                  style: listItemStyles.listItemDescription,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppText(
+                      text: asset.currency.name.toUpperCase(),
+                      style: listItemStyles!.listItemTitle,
+                    ),
+                    AppText(
+                      text:
+                          "${asset.balance} ${asset.currency.name.toUpperCase()}",
+                      style: listItemStyles.listItemDescription,
+                    ),
+                  ],
                 ),
               ],
             ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
 
-                children: [
-                  AppText(
-                    text:
-                        "\$${double.parse(balance.toStringAsFixed(2)).separateByComma()}",
-                    style: listItemStyles.listItemTitle,
-                  ),
-                ],
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+
+              children: [
+                loadingBalance
+                    ? const LoadIndicator()
+                    : AppText(
+                        text:
+                            "\$${double.parse(balance.toStringAsFixed(2)).separateByComma()}",
+                        style: listItemStyles.listItemTitle,
+                      ),
+                const Icon(Icons.keyboard_arrow_right_outlined),
+              ],
             ),
-            const Icon(Icons.keyboard_arrow_right_outlined),
           ],
         ),
       ),

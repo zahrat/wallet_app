@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wallet_app/data/models/asset.dart';
 import 'package:wallet_app/data/models/currency.dart';
 import 'package:wallet_app/data/models/wallet_model.dart';
-import 'package:wallet_app/data/services/currency_service.dart';
+import 'package:wallet_app/data/repositories/currency_repository.dart';
 import 'package:wallet_app/providers/wallet_provider.dart';
 
 class HomeViewModel extends AsyncNotifier<WalletModel> {
@@ -14,7 +13,7 @@ class HomeViewModel extends AsyncNotifier<WalletModel> {
     return wallet;
   }
 
-  double getAssetBalance(Currency currency) {
+  Future<double> getAssetBalance(Currency currency) async {
     final wallet = state.value;
     if (wallet == null) {
       throw Exception('Wallet not loaded');
@@ -24,14 +23,16 @@ class HomeViewModel extends AsyncNotifier<WalletModel> {
       (asset) => asset.currency == currency,
       orElse: () => throw Exception('Asset not found'),
     );
-    switch (currency) {
-      case Currency.eth:
-        return asset.balance * CurrencyService.fetchEthCurrentPrice();
-      case Currency.btc:
-        return asset.balance * CurrencyService.fetchBtcCurrentPrice();
-      case Currency.usdt:
-        return asset.balance * CurrencyService.fetchUsdtPrice();
-    }
+
+    final currencyPrice = await ref.watch(
+      currencyRepositoryProvider(currency).future,
+    );
+
+    return asset.balance * currencyPrice;
+  }
+
+  void changeWalletFileName(String value) {
+    ref.read(walletFileNameProvider.notifier).select(value);
   }
 }
 

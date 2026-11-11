@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wallet_app/data/models/asset.dart';
+import 'package:wallet_app/data/repositories/currency_repository.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
-import 'package:wallet_app/ui/asset_detail/view_models/asset_view_model.dart';
 import 'package:wallet_app/ui/asset_detail/widgets/asset_detail_header.dart';
 import 'package:wallet_app/ui/asset_detail/widgets/asset_info.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
@@ -30,8 +30,10 @@ class _AssetDetailScreenState extends ConsumerState<AssetDetailScreen> {
         value: wallet,
         data: (loadedWallet) {
           final viewModel = ref.read(transactionViewModelProvider.notifier);
+          final currencyProvider = ref.read(
+            currencyRepositoryProvider(asset.currency).future,
+          );
           final getAssetBalance = viewModel.getAssetBalance;
-          final balance = getAssetBalance(asset.currency);
           final transactions = viewModel.getTransactions(
             currency: asset.currency,
           );
@@ -41,9 +43,26 @@ class _AssetDetailScreenState extends ConsumerState<AssetDetailScreen> {
               spacing: Spacing.xxl,
               children: [
                 AssetDetailHeader(asset: asset),
-                AssetInfo(
-                  balance: balance,
-                  currentPrice: AssetViewModel.getAssetPrice(asset.currency),
+                FutureBuilder(
+                  future: Future.wait([
+                    getAssetBalance(asset.currency),
+                    currencyProvider,
+                  ]),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done) {
+                      return const LoadIndicator();
+                    }
+
+                    if (snapshot.hasError) {
+                      return const Text('');
+                    } else {
+                      final values = snapshot.data!;
+                      return AssetInfo(
+                        balance: values[0],
+                        currentPrice: values[1],
+                      );
+                    }
+                  },
                 ),
                 TransactionList(
                   transactions: transactions,

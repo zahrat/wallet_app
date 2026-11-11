@@ -49,4 +49,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get assetDetail => 'Asset Detail';
+
+  @override
+  String get loadingWalletData => 'Loading wallet data...';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get listIsEmpty => 'List is empty';
 }

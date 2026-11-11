@@ -7,12 +7,14 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     required this.grayIcon,
     required this.grayText,
     required this.secondView,
+    required this.loadSpinner,
   });
 
   final Color borderColor;
   final Color grayIcon;
   final Color grayText;
   final Color secondView;
+  final Color loadSpinner;
 
   @override
   AppColorsExtension copyWith() {
@@ -21,6 +23,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       grayIcon: grayIcon,
       grayText: grayText,
       secondView: secondView,
+      loadSpinner: loadSpinner,
     );
   }
 
@@ -31,6 +34,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       grayIcon: Color.lerp(grayIcon, other.grayIcon, t) ?? grayIcon,
       grayText: Color.lerp(grayText, other.grayText, t) ?? grayText,
       secondView: Color.lerp(secondView, other.secondView, t) ?? grayText,
+      loadSpinner: Color.lerp(loadSpinner, other.loadSpinner, t) ?? loadSpinner,
     );
   }
 }
@@ -40,6 +44,7 @@ final lightAppColorExtension = const AppColorsExtension(
   grayIcon: Color.fromARGB(187, 127, 129, 129),
   grayText: Color.fromARGB(187, 127, 129, 129),
   secondView: Colors.white,
+  loadSpinner: Color.fromARGB(255, 117, 182, 246),
 );
 
 final darkAppColorExtension = const AppColorsExtension(
@@ -47,4 +52,5 @@ final darkAppColorExtension = const AppColorsExtension(
   grayIcon: Color(0xFFAAA5AE),
   grayText: Color(0xFFAAA5AE),
   secondView: Color.fromARGB(255, 112, 111, 111),
+  loadSpinner: Color.fromARGB(255, 117, 182, 246),
 );

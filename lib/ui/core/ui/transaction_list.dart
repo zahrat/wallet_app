@@ -1,11 +1,10 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:wallet_app/data/models/currency.dart';
 import 'package:wallet_app/data/models/transaction.dart';
 import 'package:wallet_app/extensions/number_extension.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
+import 'package:wallet_app/ui/core/ui/list_empty_state.dart';
 import 'package:wallet_app/ui/home/widgets/section_label.dart';
 
 import '../../core/ui/index.dart';
@@ -21,7 +20,7 @@ class TransactionList extends StatelessWidget {
   });
   final List<Transaction> transactions;
   final String walletAddress;
-  final double Function(Currency currency) getAssetBalance;
+  final Future<double> Function(Currency currency) getAssetBalance;
   final String? label;
   final void Function()? onSeeAll;
 
@@ -34,26 +33,40 @@ class TransactionList extends StatelessWidget {
       children: [
         SectionLabel(
           label: label ?? localizations!.recentTransactions,
-          onSeeAll: onSeeAll,
+          onSeeAll: transactions.isNotEmpty ? onSeeAll : null,
         ),
         RoundedCard(
-          child: ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: transactions.length,
-            separatorBuilder: (context, index) => const Divider(),
-            itemBuilder: (context, index) {
-              final transaction = transactions[index];
-              final isSent = transaction.from == walletAddress;
-              final balance = getAssetBalance(transaction.currency);
+          child: transactions.isEmpty
+              ? Center(child: ListEmptyState())
+              : ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: transactions.length,
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemBuilder: (context, index) {
+                    return FutureBuilder(
+                      future: getAssetBalance(transactions[index].currency),
+                      builder:
+                          (
+                            BuildContext context,
+                            AsyncSnapshot<dynamic> snapshot,
+                          ) {
+                            final transaction = transactions[index];
+                            final isSent = transaction.from == walletAddress;
+                            final balance = snapshot.data;
 
-              return TransactionItem(
-                transaction: transaction,
-                isSent: isSent,
-                balance: balance,
-              );
-            },
-          ),
+                            return TransactionItem(
+                              transaction: transaction,
+                              isSent: isSent,
+                              balance: snapshot.hasData ? balance : 0,
+                              loadingBalance:
+                                  snapshot.connectionState ==
+                                  ConnectionState.waiting,
+                            );
+                          },
+                    );
+                  },
+                ),
         ),
       ],
     );
@@ -66,11 +79,13 @@ class TransactionItem extends StatelessWidget {
     required this.transaction,
     required this.isSent,
     required this.balance,
+    this.loadingBalance = true,
   });
 
   final Transaction transaction;
   final bool isSent;
   final double balance;
+  final bool loadingBalance;
 
   @override
   Widget build(BuildContext context) {
@@ -78,49 +93,54 @@ class TransactionItem extends StatelessWidget {
 
     return Row(
       spacing: Spacing.sm,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CircleAvatar(
-          backgroundColor: isSent ? Colors.red[100] : Colors.green[100],
-          child: Transform.rotate(
-            angle: isSent ? 0 : 45,
-            child: Icon(
-              Icons.arrow_outward,
-              color: isSent ? Colors.red : Colors.green,
-            ),
-          ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Row(
+          spacing: Spacing.sm,
           children: [
-            AppText(
-              text:
-                  "${isSent ? 'Sent' : 'Recieved'} ${transaction.currency.name.toUpperCase()}",
-              style: listItemStyles!.listItemTitle,
+            CircleAvatar(
+              backgroundColor: isSent ? Colors.red[100] : Colors.green[100],
+              child: Transform.rotate(
+                angle: isSent ? 0 : 45,
+                child: Icon(
+                  Icons.arrow_outward,
+                  color: isSent ? Colors.red : Colors.green,
+                ),
+              ),
             ),
-            AppText(
-              text: isSent
-                  ? "To ${transaction.to}"
-                  : "From ${transaction.from}",
-              style: listItemStyles.listItemDescription,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppText(
+                  text:
+                      "${isSent ? 'Sent' : 'Recieved'} ${transaction.currency.name.toUpperCase()}",
+                  style: listItemStyles!.listItemTitle,
+                ),
+                AppText(
+                  text: isSent
+                      ? "To ${transaction.to}"
+                      : "From ${transaction.from}",
+                  style: listItemStyles.listItemDescription,
+                ),
+              ],
             ),
           ],
         ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-
-            children: [
-              AppText(
-                text:
-                    "${isSent ? '-' : '+'}${transaction.value} ${transaction.currency.name.toUpperCase()}",
-              ),
-              AppText(
-                text:
-                    "\$${double.parse(balance.toStringAsFixed(2)).separateByComma()}",
-                style: TextStyle(color: Colors.blueGrey),
-              ),
-            ],
-          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            AppText(
+              text:
+                  "${isSent ? '-' : '+'}${transaction.value} ${transaction.currency.name.toUpperCase()}",
+            ),
+            loadingBalance
+                ? const LoadIndicator()
+                : AppText(
+                    text:
+                        "\$${double.parse(balance.toStringAsFixed(2)).separateByComma()}",
+                    style: TextStyle(color: Colors.blueGrey),
+                  ),
+          ],
         ),
       ],
     );

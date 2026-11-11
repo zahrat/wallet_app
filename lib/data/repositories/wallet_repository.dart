@@ -6,13 +6,22 @@ import 'package:wallet_app/data/services/wallet_service.dart';
 
 class WalletRepository {
   WalletRepository(this._walletService);
+
   final WalletService _walletService;
+  bool _showException = true;
 
-  Future<WalletModel> getWalletInfo() async {
-    final response = await _walletService.fetchWalletInfo();
+  Future<WalletModel> getWalletInfo(String fileName) async {
+    final response = await _walletService.fetchWalletInfo(walletfile: fileName);
     final walletmodel = WalletModel.fromJson(jsonDecode(response));
+    if (_showException) {
+      throw Exception('not found');
+    } else {
+      return walletmodel;
+    }
+  }
 
-    return walletmodel;
+  void disableShowException() {
+    _showException = false;
   }
 }
 
