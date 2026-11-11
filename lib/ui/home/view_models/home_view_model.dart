@@ -30,6 +30,10 @@ class HomeViewModel extends AsyncNotifier<WalletModel> {
 
     return asset.balance * currencyPrice;
   }
+
+  void changeWalletFileName(String value) {
+    ref.read(walletFileNameProvider.notifier).select(value);
+  }
 }
 
 final homeViewModelProvider = AsyncNotifierProvider<HomeViewModel, WalletModel>(

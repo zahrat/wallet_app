@@ -25,6 +25,9 @@ class HomeScreen extends ConsumerWidget {
     final getAssetBalance = ref
         .read(homeViewModelProvider.notifier)
         .getAssetBalance;
+    final onWalletSelect = ref
+        .read(homeViewModelProvider.notifier)
+        .changeWalletFileName;
     final totalBalance = ref.watch(totalBalanceProvider);
 
     return AppContainer(
@@ -52,14 +55,19 @@ class HomeScreen extends ConsumerWidget {
             spacing: Spacing.lg,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              HomeHeader(walletAddress: wallet?.address ?? ''),
+              HomeHeader(
+                walletAddress: wallet?.address ?? '',
+                onSelectWallet: onWalletSelect,
+              ),
               BalanceSection(balanceAsync: totalBalance),
               YourAssets(
                 assets: wallet?.assets ?? [],
                 getAssetBalance: getAssetBalance,
               ),
               TransactionList(
-                transactions: wallet.transactions?.sublist(0, 3) ?? [],
+                transactions: wallet.transactions.isNotEmpty
+                    ? wallet.transactions.take(3).toList()
+                    : [],
                 walletAddress: wallet?.address ?? '',
                 getAssetBalance: getAssetBalance,
                 onSeeAll: () => StatefulNavigationShell.of(context).goBranch(1),
