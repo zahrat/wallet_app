@@ -30,8 +30,8 @@ class _AssetDetailScreenState extends ConsumerState<AssetDetailScreen> {
         value: wallet,
         data: (loadedWallet) {
           final viewModel = ref.read(transactionViewModelProvider.notifier);
-          final currencyProvider = ref.watch(
-            currencyRepositoryProvider(asset.currency),
+          final currencyProvider = ref.read(
+            currencyRepositoryProvider(asset.currency).future,
           );
           final getAssetBalance = viewModel.getAssetBalance;
           final transactions = viewModel.getTransactions(
@@ -44,13 +44,25 @@ class _AssetDetailScreenState extends ConsumerState<AssetDetailScreen> {
               children: [
                 AssetDetailHeader(asset: asset),
                 FutureBuilder(
-                  future: getAssetBalance(asset.currency),
-                  builder: ((context, snapshot) {
-                    return AssetInfo(
-                      balance: snapshot.hasData ? snapshot.data ?? 0 : 0,
-                      currentPrice: currencyProvider.whenOrNull(),
-                    );
-                  }),
+                  future: Future.wait([
+                    getAssetBalance(asset.currency),
+                    currencyProvider,
+                  ]),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done) {
+                      return const LoadIndicator();
+                    }
+
+                    if (snapshot.hasError) {
+                      return const Text('');
+                    } else {
+                      final values = snapshot.data!;
+                      return AssetInfo(
+                        balance: values[0],
+                        currentPrice: values[1],
+                      );
+                    }
+                  },
                 ),
                 TransactionList(
                   transactions: transactions,

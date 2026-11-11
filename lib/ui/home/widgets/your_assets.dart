@@ -5,6 +5,7 @@ import 'package:wallet_app/data/models/currency.dart';
 import 'package:wallet_app/extensions/number_extension.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
+import 'package:wallet_app/ui/core/ui/list_empty_state.dart';
 import 'package:wallet_app/ui/home/widgets/section_label.dart';
 
 import '../../core/ui/index.dart';
@@ -32,28 +33,34 @@ class YourAssets extends StatelessWidget {
       children: [
         SectionLabel(label: localizations!.yourAssets),
         RoundedCard(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return FutureBuilder(
-                future: getAssetBalance(assets[index].currency),
-                builder:
-                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                      final asset = assets[index];
-                      final balance = snapshot.data;
+          child: assets.isEmpty
+              ? Center(child: ListEmptyState())
+              : ListView.builder(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return FutureBuilder(
+                      future: getAssetBalance(assets[index].currency),
+                      builder:
+                          (
+                            BuildContext context,
+                            AsyncSnapshot<dynamic> snapshot,
+                          ) {
+                            final asset = assets[index];
+                            final balance = snapshot.data;
 
-                      return CurrencyItem(
-                        asset: asset,
-                        balance: snapshot.hasData ? balance : 0,
-                        onTapAsset: () => onTap(asset),
-                        loadingBalance:
-                            snapshot.connectionState == ConnectionState.waiting,
-                      );
-                    },
-              );
-            },
-            itemCount: assets.length,
-          ),
+                            return CurrencyItem(
+                              asset: asset,
+                              balance: snapshot.hasData ? balance : 0,
+                              onTapAsset: () => onTap(asset),
+                              loadingBalance:
+                                  snapshot.connectionState ==
+                                  ConnectionState.waiting,
+                            );
+                          },
+                    );
+                  },
+                  itemCount: assets.length,
+                ),
         ),
       ],
     );

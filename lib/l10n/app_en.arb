@@ -14,5 +14,6 @@
   "transactions":"Transactions",
   "assetDetail":"Asset Detail",
   "loadingWalletData":"Loading wallet data...",
-  "retry":"Retry"
+  "retry":"Retry",
+  "listIsEmpty":"List is empty"
 }

@@ -14,5 +14,6 @@
   "transactions":"لیست تراکنشها",
   "assetDetail":"جزییات دارایی",
   "loadingWalletData":"در حال دریافت اطلاعات کیف پول ...",
-  "retry":"تلاش مجدد"
+  "retry":"تلاش مجدد",
+  "listIsEmpty":"لیست خالی است!"
 }

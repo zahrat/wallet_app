@@ -18,15 +18,9 @@ class BalanceSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            spacing: Spacing.sm,
-            children: [
-              AppText(
-                text: localizations!.totalBalace,
-                style: textTheme.titleMedium,
-              ),
-              const Icon(Icons.remove_red_eye_outlined, size: 15),
-            ],
+          AppText(
+            text: localizations!.totalBalace,
+            style: textTheme.titleMedium,
           ),
           AsyncValueView<double>(
             value: balanceAsync,

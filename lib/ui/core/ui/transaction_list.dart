@@ -4,6 +4,7 @@ import 'package:wallet_app/data/models/transaction.dart';
 import 'package:wallet_app/extensions/number_extension.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
+import 'package:wallet_app/ui/core/ui/list_empty_state.dart';
 import 'package:wallet_app/ui/home/widgets/section_label.dart';
 
 import '../../core/ui/index.dart';
@@ -32,34 +33,40 @@ class TransactionList extends StatelessWidget {
       children: [
         SectionLabel(
           label: label ?? localizations!.recentTransactions,
-          onSeeAll: onSeeAll,
+          onSeeAll: transactions.isNotEmpty ? onSeeAll : null,
         ),
         RoundedCard(
-          child: ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: transactions.length,
-            separatorBuilder: (context, index) => const Divider(),
-            itemBuilder: (context, index) {
-              return FutureBuilder(
-                future: getAssetBalance(transactions[index].currency),
-                builder:
-                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                      final transaction = transactions[index];
-                      final isSent = transaction.from == walletAddress;
-                      final balance = snapshot.data;
+          child: transactions.isEmpty
+              ? Center(child: ListEmptyState())
+              : ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: transactions.length,
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemBuilder: (context, index) {
+                    return FutureBuilder(
+                      future: getAssetBalance(transactions[index].currency),
+                      builder:
+                          (
+                            BuildContext context,
+                            AsyncSnapshot<dynamic> snapshot,
+                          ) {
+                            final transaction = transactions[index];
+                            final isSent = transaction.from == walletAddress;
+                            final balance = snapshot.data;
 
-                      return TransactionItem(
-                        transaction: transaction,
-                        isSent: isSent,
-                        balance: snapshot.hasData ? balance : 0,
-                        loadingBalance:
-                            snapshot.connectionState == ConnectionState.waiting,
-                      );
-                    },
-              );
-            },
-          ),
+                            return TransactionItem(
+                              transaction: transaction,
+                              isSent: isSent,
+                              balance: snapshot.hasData ? balance : 0,
+                              loadingBalance:
+                                  snapshot.connectionState ==
+                                  ConnectionState.waiting,
+                            );
+                          },
+                    );
+                  },
+                ),
         ),
       ],
     );
