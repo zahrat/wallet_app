@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wallet_app/ui/core/theme/anchor_menu_theme.dart';
 import 'package:wallet_app/ui/core/theme/app_colors_extension.dart';
 import 'package:wallet_app/ui/core/theme/list_item_theme.dart';
 import 'package:wallet_app/ui/core/theme/navigation_bar_theme.dart';
@@ -18,6 +19,7 @@ final lightTheme = ThemeData.light().copyWith(
     lightAppColorExtension,
     lightListItemTextStyles,
     lightSortAndFilterTheme,
+    lightAnchorMenuTheme,
   ],
 
   colorScheme: ColorScheme(
@@ -61,6 +63,7 @@ final darkTheme = ThemeData.dark().copyWith(
     darkAppColorExtension,
     darkListItemTextStyles,
     darkSortAndFilterTheme,
+    darkAnchorMenuTheme,
   ],
 
   colorScheme: const ColorScheme(
