@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/ui/core/theme/anchor_menu_theme.dart';
 
-class AppAnchorMenu<T> extends StatelessWidget {
+class AppAnchorMenu<T> extends StatefulWidget {
   const AppAnchorMenu({
     required this.label,
     this.icon,
@@ -21,43 +21,65 @@ class AppAnchorMenu<T> extends StatelessWidget {
   final VoidCallback? onOpen;
 
   @override
+  State<AppAnchorMenu<T>> createState() => _AppAnchorMenuState<T>();
+}
+
+class _AppAnchorMenuState<T> extends State<AppAnchorMenu<T>> {
+  IconData arrow = (Icons.keyboard_arrow_down_rounded);
+
+  _animate() {
+    setState(() {
+      arrow = arrow == Icons.keyboard_arrow_down_rounded
+          ? Icons.keyboard_arrow_up_rounded
+          : Icons.keyboard_arrow_down_rounded;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final styles = Theme.of(context).extension<AnchorMenuTheme>();
 
     return MenuAnchor(
       style: styles?.menuStyle,
       menuChildren: [
-        for (final value in values)
+        for (final value in widget.values)
           MenuItemButton(
-            style: selectedValue == value
+            style: widget.selectedValue == value
                 ? styles?.selectedItemStyle
                 : styles?.itemStyle,
-            trailingIcon: selectedValue == value
+            trailingIcon: widget.selectedValue == value
                 ? const Icon(Icons.check_rounded)
                 : const SizedBox(width: 18),
-            onPressed: onChanged == null ? null : () => onChanged!(value),
-            child: Text(labelFor(value)),
+            onPressed: widget.onChanged == null
+                ? null
+                : () => widget.onChanged!(value),
+            child: Text(widget.labelFor(value)),
           ),
       ],
       builder: (context, controller, child) {
         return TextButton(
           style: styles?.buttonStyle,
           onPressed: () {
+            _animate();
             if (controller.isOpen) {
               controller.close();
             } else {
-              onOpen?.call();
+              widget.onOpen?.call();
               controller.open();
             }
           },
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (icon != null) Icon(icon, color: styles?.sortIconColor),
+              if (widget.icon != null)
+                Icon(widget.icon, color: styles?.sortIconColor),
               const SizedBox(width: 8),
-              Text(label),
+              Text(widget.label),
               const SizedBox(width: 8),
-              const Icon(Icons.keyboard_arrow_down_rounded),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 4000),
+                child: Icon(arrow),
+              ),
             ],
           ),
         );
