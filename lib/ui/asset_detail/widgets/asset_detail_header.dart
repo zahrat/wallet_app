@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wallet_app/data/models/asset.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
 import 'package:wallet_app/ui/core/ui/index.dart';
+import 'package:wallet_app/ui/core/ui/photo_hero.dart';
 
 class AssetDetailHeader extends StatelessWidget {
   const AssetDetailHeader({super.key, required this.asset});
@@ -17,15 +18,7 @@ class AssetDetailHeader extends StatelessWidget {
         Row(
           spacing: Spacing.md,
           children: [
-            CircleAvatar(
-              radius: 25,
-              child: AppImage(
-                imageUri: asset.icon,
-                width: 100,
-                height: 100,
-                isAsset: false,
-              ),
-            ),
+            PhotoHero(photo: asset.icon, width: 100),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -46,3 +39,9 @@ class AssetDetailHeader extends StatelessWidget {
     );
   }
 }
+
+
+            // CircleAvatar(
+            //   radius: 25,
+            //   child: PhotoHero(photo: asset.icon, width: 100),
+            // )

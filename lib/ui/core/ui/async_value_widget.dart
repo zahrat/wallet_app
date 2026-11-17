@@ -20,12 +20,11 @@ class AsyncValueView<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final errorColor = Theme.of(context).colorScheme.onErrorContainer;
     final retryTxt = AppLocalizations.of(context)!.retry;
 
     final errorStyle = Theme.of(
       context,
-    ).textTheme.titleLarge?.copyWith(color: errorColor);
+    ).textTheme.titleLarge?.copyWith(color: Colors.red);
 
     if (value.isLoading || value.isRefreshing || value.isReloading) {
       return loadWidget ??

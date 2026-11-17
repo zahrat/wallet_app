@@ -26,7 +26,19 @@ final GoRouter appRouter = GoRouter(
                 GoRoute(
                   path: 'assetDetail',
                   name: 'assetDetail',
-                  builder: (context, state) => AssetDetailScreen(),
+                  pageBuilder: (context, state) {
+                    return CustomTransitionPage(
+                      key: state.pageKey,
+                      child: AssetDetailScreen(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                            return FadeTransition(
+                              opacity: animation,
+                              child: child,
+                            );
+                          },
+                    );
+                  },
                 ),
               ],
             ),

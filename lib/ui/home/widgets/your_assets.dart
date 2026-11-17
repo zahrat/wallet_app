@@ -6,6 +6,7 @@ import 'package:wallet_app/extensions/number_extension.dart';
 import 'package:wallet_app/l10n/app_localizations.dart';
 import 'package:wallet_app/ui/core/theme/index.dart';
 import 'package:wallet_app/ui/core/ui/list_empty_state.dart';
+import 'package:wallet_app/ui/core/ui/photo_hero.dart';
 import 'package:wallet_app/ui/home/widgets/section_label.dart';
 
 import '../../core/ui/index.dart';
@@ -24,7 +25,7 @@ class YourAssets extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
 
     void onTap(Asset asset) {
-      context.go('home/assetDetail', extra: asset);
+      context.push('home/assetDetail', extra: asset);
     }
 
     return Column(
@@ -100,11 +101,10 @@ class CurrencyItem extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundColor: secondaryColor,
-                  child: AppImage(
-                    imageUri: asset.icon,
+                  child: PhotoHero(
+                    photo: asset.icon,
                     width: 50,
-                    height: 50,
-                    isAsset: false,
+                    onTap: onTapAsset,
                   ),
                 ),
                 Column(
