@@ -27,7 +27,7 @@ class AppAnchorMenu<T> extends StatefulWidget {
 class _AppAnchorMenuState<T> extends State<AppAnchorMenu<T>> {
   IconData arrow = (Icons.keyboard_arrow_down_rounded);
 
-  _animate() {
+  void _animate() {
     setState(() {
       arrow = arrow == Icons.keyboard_arrow_down_rounded
           ? Icons.keyboard_arrow_up_rounded
